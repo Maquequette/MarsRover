@@ -3,9 +3,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Rover = void 0;
 class Rover {
     constructor(orientation, position, planet) {
+        this.commands = [];
         this.position = position;
         this.orientation = orientation;
         this.planet = planet;
+    }
+    addCommand(command) {
+        this.commands.push(command);
+    }
+    setCommands(commands) {
+        this.commands = commands;
+    }
+    executeCommands() {
+        this.commands.forEach((command, i) => {
+            console.log(i, command);
+            command();
+        });
     }
     getPosition() {
         return this.position;
@@ -17,6 +30,7 @@ class Rover {
         this.orientation.setValue(this.orientation.getValue() + degree.getValue());
     }
     move() {
+        console.log('ici');
         switch (this.orientation.getValue()) {
             case 90 || -270:
                 if (this.planet.isValidPosition(this.position.getX() + 1, this.position.getY())) {

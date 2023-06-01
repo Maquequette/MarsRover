@@ -10,3 +10,5 @@ const plan = new Planet_1.Planet(100, 100);
 const rover = new Rover_1.Rover(orient, pos, plan);
 rover.turn(new Orientation_1.Orientation(90));
 rover.move();
+rover.setCommands([rover.move.bind(rover), rover.move.bind(rover), rover.move.bind(rover), rover.move.bind(rover)]);
+rover.executeCommands();

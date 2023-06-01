@@ -13,16 +13,16 @@ export class Rover {
     this.planet = planet;
   }
 
-  public addCommand(command: Function):void{
+  public addCommand(command: Function): void {
     this.commands.push(command);
   }
 
-  public setCommands(commands:Array<Function>):void{
+  public setCommands(commands:Array<Function>): void {
     this.commands =  commands;
   }
 
-  public executeCommands():void{
-    this.commands.forEach(command =>command());
+  public executeCommands(): void {
+    this.commands.forEach( command => command());
   }
 
   public getPosition(): Coordinates{
@@ -37,7 +37,8 @@ export class Rover {
     this.orientation.setValue(this.orientation.getValue() + degree.getValue());
   }
 
-  public move(): void{
+  public move(): void {
+
     switch (this.orientation.getValue()) {
       case 90 || -270:
         if (
