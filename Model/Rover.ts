@@ -5,6 +5,7 @@ export class Rover {
   private position: Coordinates;
   private orientation: Orientation;
   private planet: Planet;
+  private commands: Array<Function>=[];
 
   constructor(orientation: Orientation, position: Coordinates, planet: Planet) {
     this.position = position;
@@ -12,19 +13,31 @@ export class Rover {
     this.planet = planet;
   }
 
-  public getPosition(): Coordinates {
+  public addCommand(command: Function):void{
+    this.commands.push(command);
+  }
+
+  public setCommands(commands:Array<Function>):void{
+    this.commands =  commands;
+  }
+
+  public executeCommands():void{
+    this.commands.forEach(command =>command());
+  }
+
+  public getPosition(): Coordinates{
     return this.position;
   }
 
-  public getOrientation(): Orientation {
+  public getOrientation(): Orientation{
     return this.orientation;
   }
 
-  public turn(degree: Orientation): void {
+  public turn(degree: Orientation): void{
     this.orientation.setValue(this.orientation.getValue() + degree.getValue());
   }
 
-  public move(): void {
+  public move(): void{
     switch (this.orientation.getValue()) {
       case 90 || -270:
         if (

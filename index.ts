@@ -10,3 +10,5 @@ const rover = new Rover(orient, pos, plan);
 
 rover.turn(new Orientation(90));
 rover.move();
+
+rover.setCommands([rover.move,rover.move,rover.move,rover.move]);
