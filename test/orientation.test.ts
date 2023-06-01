@@ -12,7 +12,7 @@ describe('orientation', () => {
         [Orientation.North, 1, Orientation.East],
         [Orientation.East, 1, Orientation.South],
         [Orientation.South, 1, Orientation.West],
-        [Orientation.West, 1, Orientation.North]
+        [Orientation.West, 1, Orientation.North],
     ])
     .it('%s %s %s', (initial: Orientation, nb: number, final: Orientation) => {
     
