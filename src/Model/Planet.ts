@@ -16,13 +16,11 @@ export class Planet {
     return { width: this.width, height: this.height };
   }
 
-  isOutOfBand(position: Coordinates): boolean {
-    return (
-      position.getX() >= 0 &&
-      position.getX() < this.width &&
-      position.getY() >= 0 &&
-      position.getY() < this.height
-    );
+  normalize(position: Coordinates): Coordinates {
+    const x = ((position.getX() % this.width) % -this.width) + this.width;
+    const y = ((position.getY() % this.width) % -this.width) + this.width;
+
+    return new Coordinates(x, y);
   }
 
   hasObstacle(position: Coordinates): boolean {
@@ -34,5 +32,11 @@ export class Planet {
       );
     });
     return hasObstacle;
+  }
+}
+
+class ObstacleError extends Error {
+  constructor(message: string) {
+    super(message);
   }
 }

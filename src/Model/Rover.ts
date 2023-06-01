@@ -17,8 +17,6 @@ export class Rover {
     if (this.planet.hasObstacle(position)) {
       console.log("OBSTACLE !!!");
       console.log(this.position);
-    } else if (this.planet.isOutOfBand(position)) {
-      this.position.setY(this.planet.getSize().height);
     } else {
       this.position = position;
       console.log(position);
@@ -34,11 +32,15 @@ export class Rover {
   }
 
   moveForward() {
-    this.position = this.position.moveForward();
+    this.setPosition(
+      this.planet.normalize(this.position.moveForward(this.orientation))
+    );
   }
 
   movebackward() {
-    this.position = this.position.moveBackward();
+    this.setPosition(
+      this.planet.normalize(this.position.moveBackward(this.orientation))
+    );
   }
 
   public setActions(actions: Array<Actions>) {
