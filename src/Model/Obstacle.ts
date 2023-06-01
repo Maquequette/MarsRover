@@ -1,5 +1,7 @@
 import { Coordinates } from "./Coordinates";
+
 export class Obstacle {
+  
   private position: Coordinates;
 
   constructor(position: Coordinates) {

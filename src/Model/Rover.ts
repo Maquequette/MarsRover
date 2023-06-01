@@ -2,7 +2,9 @@ import { Coordinates } from "./Coordinates";
 import { Orientation } from "../Enum/Orientation";
 import { Planet } from "./Planet";
 import { Actions } from "../Enum/Actions";
+
 export class Rover {
+
   private position: Coordinates;
   private orientation: Orientation;
   private planet: Planet;
@@ -13,7 +15,8 @@ export class Rover {
     this.planet = planet;
   }
 
-  private setPosition(position: Coordinates) {
+  private setPosition(position: Coordinates):void {
+
     if (this.planet.hasObstacle(position)) {
       console.log("OBSTACLE !!!");
       console.log(this.position);
@@ -25,23 +28,23 @@ export class Rover {
     }
   }
 
-  turnLeft() {
+  turnLeft():void {
     this.orientation = this.orientation.RotationAntihoraire();
   }
 
-  turnRight() {
+  turnRight():void {
     this.orientation = this.orientation.RotationHoraire();
   }
 
-  moveForward() {
-    this.position = this.position.moveForward();
+  moveForward():void {
+    this.position = this.position.moveForward(this.orientation);
   }
 
-  movebackward() {
-    this.position = this.position.moveBackward();
+  movebackward():void {
+    this.position = this.position.moveBackward(this.orientation);
   }
 
-  public setActions(actions: Array<Actions>) {
+  public setActions(actions: Array<Actions>):void {
     actions.map((action: Actions) => {
       switch (action) {
         case Actions.MoveBackward:
@@ -58,5 +61,13 @@ export class Rover {
           break;
       }
     });
+  }
+
+  getOrientation():Orientation {
+    return this.orientation;
+  }
+
+  getPosition():Coordinates {
+    return this.position;
   }
 }

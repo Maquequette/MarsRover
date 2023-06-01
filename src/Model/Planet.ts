@@ -2,6 +2,7 @@ import { Coordinates } from "./Coordinates";
 import { Obstacle } from "./Obstacle";
 
 export class Planet {
+  
   private width: number;
   private height: number;
   private obstacles: Array<Obstacle>;

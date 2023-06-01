@@ -1,5 +1,7 @@
 import { Orientation } from "../Enum/Orientation";
+
 export class Coordinates {
+
   private x: number;
   private y: number;
 
@@ -8,44 +10,44 @@ export class Coordinates {
     this.y = y;
   }
 
-  public getX(): number {
+  public getX():number {
     return this.x;
   }
 
-  public getY(): number {
+  public getY():number {
     return this.y;
   }
 
-  public setX(x: number): void {
+  public setX(x: number):void {
     this.x = x;
   }
 
-  public setY(y: number): void {
+  public setY(y: number):void {
     this.y = y;
   }
 
-  public setPosition(position: Coordinates) {
+  public setPosition(position: Coordinates):void {
     this.setX(position.getX());
     this.setY(position.getY());
   }
 
-  private incrementLongitude() {
+  private incrementLongitude():Coordinates {
     return new Coordinates((this.x += 1), this.y);
   }
 
-  private decrementLongitude() {
+  private decrementLongitude():Coordinates {
     return new Coordinates((this.x -= 1), this.y);
   }
 
-  private incrementLatitude() {
+  private incrementLatitude():Coordinates {
     return new Coordinates(this.x, (this.y += 1));
   }
 
-  private decrementLatitude() {
+  private decrementLatitude():Coordinates {
     return new Coordinates(this.x, (this.y -= 1));
   }
 
-  moveForward(orientation: Orientation) {
+  moveForward(orientation: Orientation):Coordinates {
     let nPosition;
     switch (orientation) {
       case Orientation.North:
@@ -64,7 +66,7 @@ export class Coordinates {
     return nPosition;
   }
 
-  moveBackward(orientation: Orientation) {
+  moveBackward(orientation: Orientation):Coordinates {
     let nPosition;
     switch (orientation) {
       case Orientation.North:
