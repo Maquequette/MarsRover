@@ -31,9 +31,3 @@ export class Planet {
     );
   }
 }
-
-class ObstacleError extends Error {
-  constructor(message: string) {
-    super(message);
-  }
-}
