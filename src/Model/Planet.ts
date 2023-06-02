@@ -18,20 +18,17 @@ export class Planet {
 
   normalize(position: Coordinates): Coordinates {
     const x = ((position.getX() % this.width) % -this.width) + this.width;
-    const y = ((position.getY() % this.width) % -this.width) + this.width;
+    const y = ((position.getY() % this.height) % -this.height) + this.height;
 
     return new Coordinates(x, y);
   }
 
   hasObstacle(position: Coordinates): boolean {
-    let hasObstacle = false;
-    this.obstacles.map((obstacle) => {
-      return (
-        obstacle.getPosition().getX() === position.getX() ||
-        obstacle.getPosition().getY() === position.getY()
-      );
-    });
-    return hasObstacle;
+    return this.obstacles.some(
+      (obs) =>
+        obs.getPosition().getX() === position.getX() &&
+        obs.getPosition().getY() === position.getY()
+    );
   }
 }
 
