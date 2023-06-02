@@ -1,7 +1,6 @@
 import { Coordinates } from "./Coordinates";
 import { Orientation } from "../Enum/Orientation";
 import { Planet } from "./Planet";
-import { Actions } from "../Enum/Actions";
 export class Rover {
   private position: Coordinates;
   private orientation: Orientation;
@@ -41,24 +40,5 @@ export class Rover {
     this.setPosition(
       this.planet.normalize(this.position.moveBackward(this.orientation))
     );
-  }
-
-  public setActions(actions: Array<Actions>) {
-    actions.map((action: Actions) => {
-      switch (action) {
-        case Actions.MoveBackward:
-          this.movebackward();
-          break;
-        case Actions.MoveForward:
-          this.moveForward();
-          break;
-        case Actions.TurnLeft:
-          this.turnLeft();
-          break;
-        case Actions.TurnRight:
-          this.turnRight();
-          break;
-      }
-    });
   }
 }
