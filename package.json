@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@types/jest": "^29.5.2",
     "typescript": "^5.0.4"
   },
   "name": "marsrover",
@@ -7,12 +8,14 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1"
   }
 }

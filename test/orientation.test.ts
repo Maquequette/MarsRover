@@ -1,12 +1,18 @@
 import { Orientation } from '../src/Enum/Orientation'
-import { Coordinates } from '../src/Model/Coordinates';
-import { Planet } from '../src/Model/Planet';
+import { Position } from '../src/Model/Position'
+import { Planet } from '../src/Model/Planet'
 import { Rover } from '../src/Model/Rover'
-const each = require("jest-each").default;
+import { Coordinate } from '../src/Model/Coordinate'
+import { Axis } from '../src/Enum/Axis'
+const each = require("jest-each").default
 
 describe('orientation', () => {
-    const coordinates = new Coordinates(0, 0);
-    const planet = new Planet(10, 10, []);
+    const planet = new Planet(10, 10, [])
+    const position = new Position(
+        new Coordinate(0, Axis.LATITUDE),
+        new Coordinate(0, Axis.LONGITUDE),
+        planet
+    )
 
     each([
         [Orientation.North, 1, Orientation.East],
@@ -16,13 +22,13 @@ describe('orientation', () => {
     ])
     .it('%s %s %s', (initial: Orientation, nb: number, final: Orientation) => {
     
-        const wall_e = new Rover(initial, coordinates, planet);
+        const wall_e = new Rover(initial, position)
         
         for(let nbRotation = 0; nbRotation < nb; nbRotation++){
-            wall_e.turnRight();
+            wall_e.turnRight()
         }
 
-        expect(wall_e.getOrientation()).toBe(final);
+        expect(wall_e.getOrientation()).toBe(final)
     })
 
     each([
@@ -33,12 +39,12 @@ describe('orientation', () => {
     ])
     .it('%s %s %s', (initial: Orientation, nb: number, final: Orientation) => {
 
-        const wall_e = new Rover(initial, coordinates, planet);
+        const wall_e = new Rover(initial, position)
         
         for(let nbRotation = 0; nbRotation < nb; nbRotation++){
-            wall_e.turnLeft();
+            wall_e.turnLeft()
         }
 
-        expect(wall_e.getOrientation()).toBe(final);
+        expect(wall_e.getOrientation()).toBe(final)
     })
 })

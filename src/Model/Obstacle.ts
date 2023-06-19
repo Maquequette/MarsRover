@@ -1,16 +1,17 @@
-import { Coordinates } from "./Coordinates";
+import { Position } from "./Position"
+
 export class Obstacle {
-  private position: Coordinates;
+  private position: Position
 
-  constructor(position: Coordinates) {
-    this.position = position;
+  constructor(position: Position) {
+    this.position = position
   }
 
-  public getPosition(): Coordinates {
-    return this.position;
+  public getPosition(): Position {
+    return this.position
   }
 
-  public setPosition(position: Coordinates): void {
-    this.position.setPosition(position);
+  public setPosition(position: Position): void {
+    //this.position.setPosition(position)
   }
 }

@@ -1,64 +1,66 @@
-import { Coordinates } from "./Coordinates";
-import { Orientation } from "../Enum/Orientation";
-import { Planet } from "./Planet";
-import { Actions } from "../Enum/Actions";
-export class Rover {
-  private position: Coordinates;
-  private orientation: Orientation;
-  private planet: Planet;
+import { Position } from "./Position"
+import { Orientation } from "../Enum/Orientation"
+import { Actions } from "../Enum/Actions"
 
-  constructor(orientation: Orientation, position: Coordinates, planet: Planet) {
+export class Rover {
+  
+  private position: Position;
+  private orientation: Orientation;
+
+  constructor(orientation: Orientation, position: Position) {
     this.position = position;
     this.orientation = orientation;
-    this.planet = planet;
   }
 
-  private setPosition(position: Coordinates) {
-    if (this.planet.hasObstacle(position)) {
-      console.log("OBSTACLE !!!");
-      console.log(this.position);
-    } else {
-      this.position = position;
-      console.log(position);
-    }
+  public turnLeft(): void {
+    this.orientation = this.orientation.RotationAntihoraire()
   }
 
-  turnLeft() {
-    this.orientation = this.orientation.RotationAntihoraire();
+  public turnRight(): void {
+    this.orientation = this.orientation.RotationHoraire()
   }
 
-  turnRight() {
-    this.orientation = this.orientation.RotationHoraire();
+  public moveForward(): void {
+    this.position = this.position.move(this.orientation)
   }
 
-  moveForward() {
-    this.setPosition(
-      this.planet.normalize(this.position.moveForward(this.orientation))
-    );
+  public movebackward(): void {
+    this.position = this.position.move(this.orientation)
   }
 
-  movebackward() {
-    this.setPosition(
-      this.planet.normalize(this.position.moveBackward(this.orientation))
-    );
+  public getOrientation(): Orientation {
+    return this.orientation
   }
 
-  public setActions(actions: Array<Actions>) {
-    actions.map((action: Actions) => {
-      switch (action) {
-        case Actions.MoveBackward:
-          this.movebackward();
-          break;
-        case Actions.MoveForward:
-          this.moveForward();
-          break;
-        case Actions.TurnLeft:
-          this.turnLeft();
-          break;
-        case Actions.TurnRight:
-          this.turnRight();
-          break;
-      }
-    });
+  public getPosition(): Position {
+    return this.position
   }
+
+  // private setPosition(position: Position): void {
+  //   if (this.planet.hasObstacle(position)) {
+  //     console.log("OBSTACLE !!!");
+  //     console.log(this.position);
+  //   } else {
+  //     this.position = position;
+  //   }
+  // }
+
+  // public setActions(actions: Array<Actions>):void {
+  //   actions.map((action: Actions) => {
+  //     switch (action) {
+  //       case Actions.MoveBackward:
+  //         this.movebackward();
+  //         break;
+  //       case Actions.MoveForward:
+  //         this.moveForward();
+  //         break;
+  //       case Actions.TurnLeft:
+  //         this.turnLeft();
+  //         break;
+  //       case Actions.TurnRight:
+  //         this.turnRight();
+  //         break;
+  //     }
+  //   });
+  // }
 }
