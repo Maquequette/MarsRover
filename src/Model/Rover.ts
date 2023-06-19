@@ -1,47 +1,31 @@
-import { Coordinates } from "./Coordinates";
 import { Orientation } from "../Enum/Orientation";
-import { Planet } from "./Planet";
-import { Messager } from "../Model/Messager";
-import { ObstacleError } from "../Error/ObstacleError";
+import { Position } from "../Geometry/Position";
+import { State } from "./State";
 
 export class Rover {
-  private position: Coordinates;
-  private orientation: Orientation;
-  private planet: Planet;
+  private _state: State;
 
-  constructor(orientation: Orientation, position: Coordinates, planet: Planet) {
-    this.position = position;
-    this.orientation = orientation;
-    this.planet = planet;
-  }
-
-  private setPosition(position: Coordinates) {
-    if (this.planet.hasObstacle(position)) {
-      new Messager("Obstacle");
-      throw new ObstacleError("bip bop !! nop");
-    } else {
-      this.position = position;
-      console.log(position);
-    }
+  constructor(orientation: Orientation, position: Position) {
+    this._state = new State(orientation, position);
   }
 
   turnLeft() {
-    this.orientation = this.orientation.RotationAntihoraire();
+    this._state = this._state.counterClockwiseRotation();
+    return this._state;
   }
 
   turnRight() {
-    this.orientation = this.orientation.RotationHoraire();
+    this._state = this._state.clockwiseRotation();
+    return this._state;
   }
 
   moveForward() {
-    this.setPosition(
-      this.planet.normalize(this.position.moveForward(this.orientation))
-    );
+    this._state = this._state.moveForward();
+    return this._state;
   }
 
   movebackward() {
-    this.setPosition(
-      this.planet.normalize(this.position.moveBackward(this.orientation))
-    );
+    this._state = this._state.moveBackward();
+    return this._state;
   }
 }

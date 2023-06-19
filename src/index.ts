@@ -1,5 +1,5 @@
 import { Orientation } from "./Enum/Orientation";
-import { Coordinates } from "./Model/Coordinates";
+import { Coordinates } from "./Geometry/Position";
 import { Planet } from "./Model/Planet";
 import { Rover } from "./Model/Rover";
 import { Obstacle } from "./Model/Obstacle";

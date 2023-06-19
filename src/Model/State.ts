@@ -1,0 +1,65 @@
+import { Orientation } from "../Enum/Orientation.js";
+import { Position } from "../Geometry/Position.js";
+
+export class State {
+  public readonly orientation: Orientation;
+  public readonly position: Position;
+
+  public constructor(orientation: Orientation, position: Position) {
+    this.orientation = orientation;
+    this.position = position;
+  }
+
+  public decreasedLatitude(): State {
+    return new State(this.orientation, this.position.decrementLatitude());
+  }
+
+  public increasedLatitude(): State {
+    return new State(this.orientation, this.position.incrementLatitude());
+  }
+
+  public decreaseLongitude(): State {
+    return new State(this.orientation, this.position.decrementLatitude());
+  }
+
+  public increasedLongitude(): State {
+    return new State(this.orientation, this.position.incrementLatitude());
+  }
+
+  public clockwiseRotation(): State {
+    return new State(this.orientation.clockwiseRotation(), this.position);
+  }
+
+  public counterClockwiseRotation(): State {
+    return new State(
+      this.orientation.counterClockwiseRotation(),
+      this.position
+    );
+  }
+
+  public moveForward(): State {
+    switch (this.orientation) {
+      case Orientation.South:
+        return this.decreasedLatitude();
+      case Orientation.East:
+        return this.increasedLongitude();
+      case Orientation.West:
+        return this.decreaseLongitude();
+      default:
+        return this.increasedLatitude();
+    }
+  }
+
+  public moveBackward(): State {
+    switch (this.orientation) {
+      case Orientation.South:
+        return this.increasedLatitude();
+      case Orientation.East:
+        return this.decreaseLongitude();
+      case Orientation.West:
+        return this.increasedLongitude();
+      default:
+        return this.decreasedLatitude();
+    }
+  }
+}

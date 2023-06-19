@@ -1,26 +1,26 @@
 import { Actions } from "../Enum/Actions";
-import { Rover } from "./Rover";
+import { Rover } from "../Model/Rover";
 export class Remote {
-  private rover: Rover;
+  private readonly _rover: Rover;
 
   constructor(rover: Rover) {
-    this.rover = rover;
+    this._rover = rover;
   }
 
   public setActions(actions: Array<Actions>) {
     actions.map((action: Actions) => {
       switch (action) {
         case Actions.MoveBackward:
-          this.rover.movebackward();
+          this._rover.movebackward();
           break;
         case Actions.MoveForward:
-          this.rover.moveForward();
+          this._rover.moveForward();
           break;
         case Actions.TurnLeft:
-          this.rover.turnLeft();
+          this._rover.turnLeft();
           break;
         case Actions.TurnRight:
-          this.rover.turnRight();
+          this._rover.turnRight();
           break;
       }
     });

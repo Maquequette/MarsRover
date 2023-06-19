@@ -1,33 +1,24 @@
-import { Coordinates } from "./Coordinates";
 import { Obstacle } from "./Obstacle";
+import { Position } from "../Geometry/Position";
 
 export class Planet {
-  private width: number;
-  private height: number;
-  private obstacles: Array<Obstacle>;
+  private readonly _width: number;
+  private readonly _height: number;
+  private readonly _obstacles: Array<Obstacle>;
 
   constructor(width: number, height: number, obstacles: Array<Obstacle>) {
-    this.width = width;
-    this.height = height;
-    this.obstacles = obstacles;
+    this._width = width;
+    this._height = height;
+    this._obstacles = obstacles;
   }
 
-  public getSize(): { width: number; height: number } {
-    return { width: this.width, height: this.height };
+  normalize(position: Position): Position {
+    return position.normalize(this._width, this._height);
   }
 
-  normalize(position: Coordinates): Coordinates {
-    const x = ((position.getX() % this.width) % -this.width) + this.width;
-    const y = ((position.getY() % this.height) % -this.height) + this.height;
-
-    return new Coordinates(x, y);
-  }
-
-  hasObstacle(position: Coordinates): boolean {
-    return this.obstacles.some(
-      (obs) =>
-        obs.getPosition().getX() === position.getX() &&
-        obs.getPosition().getY() === position.getY()
+  hasObstacle(position: Position): boolean {
+    return this._obstacles.some((obs: Obstacle) =>
+      obs.getPosition().isSamePosition(position)
     );
   }
 }
