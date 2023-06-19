@@ -1,4 +1,5 @@
 import { Position } from "../Geometry/Position";
+
 export class Obstacle {
   private readonly _position: Position;
 
@@ -6,7 +7,7 @@ export class Obstacle {
     this._position = position;
   }
 
-  public getPosition(): Position {
-    return this._position;
+  hasObstacle(position: Position): boolean {
+    return this._position.isSamePosition(position);
   }
 }

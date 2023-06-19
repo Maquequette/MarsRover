@@ -1,5 +1,6 @@
 import { Actions } from "../Enum/Actions";
 import { Rover } from "../Model/Rover";
+
 export class Remote {
   private readonly _rover: Rover;
 

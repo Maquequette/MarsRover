@@ -1,5 +1,6 @@
 import { Obstacle } from "./Obstacle";
 import { Position } from "../Geometry/Position";
+import { Point } from "../Geometry/Point";
 
 export class Planet {
   private readonly _width: number;
@@ -12,13 +13,15 @@ export class Planet {
     this._obstacles = obstacles;
   }
 
-  normalize(position: Position): Position {
-    return position.normalize(this._width, this._height);
+  normalize(point: Point): Point {
+    return point.normalize(this._width, this._height);
   }
 
-  hasObstacle(position: Position): boolean {
-    return this._obstacles.some((obs: Obstacle) =>
-      obs.getPosition().isSamePosition(position)
-    );
+  hasObstacles(position: Position): boolean {
+    return this._obstacles.some((obs: Obstacle) => obs.hasObstacle(position));
+  }
+
+  getSize() {
+    return { width: this._width, height: this._height };
   }
 }

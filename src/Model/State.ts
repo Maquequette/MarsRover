@@ -11,19 +11,31 @@ export class State {
   }
 
   public decreasedLatitude(): State {
-    return new State(this.orientation, this.position.decrementLatitude());
+    return new State(
+      this.orientation,
+      this.position.decrementLatitudeIfAvailable()
+    );
   }
 
   public increasedLatitude(): State {
-    return new State(this.orientation, this.position.incrementLatitude());
+    return new State(
+      this.orientation,
+      this.position.incrementLatitudeIfAvailable()
+    );
   }
 
   public decreaseLongitude(): State {
-    return new State(this.orientation, this.position.decrementLatitude());
+    return new State(
+      this.orientation,
+      this.position.decrementLatitudeIfAvailable()
+    );
   }
 
   public increasedLongitude(): State {
-    return new State(this.orientation, this.position.incrementLatitude());
+    return new State(
+      this.orientation,
+      this.position.incrementLatitudeIfAvailable()
+    );
   }
 
   public clockwiseRotation(): State {

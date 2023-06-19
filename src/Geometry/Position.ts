@@ -1,39 +1,51 @@
+import { Planet } from "../Model/Planet";
+import { Point } from "./Point";
+
 export class Position {
-  private readonly _latitude: number;
-  private readonly _longitude: number;
+  private readonly _point: Point;
+  private readonly _planet: Planet;
 
-  constructor(latitude: number, longitude: number) {
-    this._latitude = latitude == -0 ? 0 : latitude;
-    this._longitude = longitude == -0 ? 0 : longitude;
+  constructor(point: Point, planet: Planet) {
+    this._point = planet.normalize(point);
+    this._planet = planet;
   }
 
-  incrementLatitude(): Position {
-    return new Position(this._latitude + 1, this._longitude);
-  }
-
-  decrementLatitude(): Position {
-    return new Position(this._latitude - 1, this._longitude);
-  }
-
-  incrementLongitude(): Position {
-    return new Position(this._latitude, this._longitude + 1);
-  }
-
-  decrementLongitude(): Position {
-    return new Position(this._latitude, this._longitude - 1);
-  }
-
-  isSamePosition(position: Position) {
-    return (
-      position._latitude === this._latitude &&
-      position._longitude === this._longitude
+  incrementLatitudeIfAvailable(): Position {
+    return this.goIfValidPosition(
+      new Position(this._point.incrementLatitude(), this._planet)
     );
   }
 
-  normalize(width: number, height: number) {
-    const longitude = ((this._longitude % width) % -width) + width;
-    const latitude = ((this._latitude % height) % -height) + height;
+  decrementLatitudeIfAvailable(): Position {
+    return this.goIfValidPosition(
+      new Position(this._point.decrementLatitude(), this._planet)
+    );
+  }
 
-    return new Position(longitude, latitude);
+  incrementLongitudeIfAvailable(): Position {
+    return this.goIfValidPosition(
+      new Position(this._point.incrementLongitude(), this._planet)
+    );
+  }
+
+  decrementLongitudeIfAvailable(): Position {
+    return this.goIfValidPosition(
+      new Position(this._point.decrementLongitude(), this._planet)
+    );
+  }
+
+  isSamePosition(position: Position) {
+    return position._point.isSamePoint(this._point);
+  }
+
+  normalize(width: number, height: number): Point {
+    return this._point.normalize(width, height);
+  }
+
+  goIfValidPosition(position: Position) {
+    if (!this._planet.hasObstacles(position)) {
+      return position;
+    }
+    return this;
   }
 }
