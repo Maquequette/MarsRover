@@ -12,8 +12,8 @@ export class Point {
 
   public normalize(width: Size, height: Size): Point {
     return new Point(
-      this._latitude.normalize(width),
-      this._longitude.normalize(height)
+      this._latitude.normalize(height),
+      this._longitude.normalize(width)
     );
   }
 
