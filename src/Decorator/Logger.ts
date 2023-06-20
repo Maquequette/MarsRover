@@ -9,25 +9,25 @@ export class RoverLogger implements RoverInterface {
     this._logged = logged;
   }
 
-  private StockerEtRenvoyer(etat: State) {
+  private keepAndSend(etat: State) {
     this._states.push(etat);
     return etat;
   }
 
   moveForward(): State {
-    return this.StockerEtRenvoyer(this._logged.moveForward());
+    return this.keepAndSend(this._logged.moveForward());
   }
 
   moveBackward(): State {
-    return this.StockerEtRenvoyer(this._logged.moveBackward());
+    return this.keepAndSend(this._logged.moveBackward());
   }
 
   turnRight(): State {
-    return this.StockerEtRenvoyer(this._logged.turnRight());
+    return this.keepAndSend(this._logged.turnRight());
   }
 
   turnLeft(): State {
-    return this.StockerEtRenvoyer(this._logged.turnLeft());
+    return this.keepAndSend(this._logged.turnLeft());
   }
 
   public toString(): string {
