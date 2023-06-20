@@ -1,5 +1,5 @@
-import { Orientation } from "../Enum/Orientation.js";
-import { Position } from "../Geometry/Position.js";
+import { Orientation } from "../Enum/Orientation";
+import { Position } from "../Geometry/Position";
 
 export class State {
   public readonly orientation: Orientation;
