@@ -29,32 +29,4 @@ export class Rover implements RoverInterface {
     this._state = this._state.moveBackward();
     return this._state;
   }
-
-  // private setPosition(position: Position): void {
-  //   if (this.planet.hasObstacle(position)) {
-  //     console.log("OBSTACLE !!!");
-  //     console.log(this.position);
-  //   } else {
-  //     this.position = position;
-  //   }
-  // }
-
-  // public setActions(actions: Array<Actions>):void {
-  //   actions.map((action: Actions) => {
-  //     switch (action) {
-  //       case Actions.MoveBackward:
-  //         this.movebackward();
-  //         break;
-  //       case Actions.MoveForward:
-  //         this.moveForward();
-  //         break;
-  //       case Actions.TurnLeft:
-  //         this.turnLeft();
-  //         break;
-  //       case Actions.TurnRight:
-  //         this.turnRight();
-  //         break;
-  //     }
-  //   });
-  // }
 }

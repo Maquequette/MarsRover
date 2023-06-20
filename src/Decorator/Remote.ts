@@ -1,5 +1,6 @@
 import { Actions } from "../Enum/Actions";
 import { Rover } from "../Model/Rover";
+import { State } from "../Model/State";
 
 export class Remote {
   private readonly _rover: Rover;
@@ -8,21 +9,20 @@ export class Remote {
     this._rover = rover;
   }
 
-  public setActions(actions: Array<Actions>) {
-    actions.map((action: Actions) => {
+  public setActions(actions: Array<Actions>): Array<State> {
+    return actions.map((action: Actions): State => {
       switch (action) {
         case Actions.MoveBackward:
-          this._rover.moveBackward();
-          break;
+          return this._rover.moveBackward();
+          
         case Actions.MoveForward:
-          this._rover.moveForward();
-          break;
+          return this._rover.moveForward();
+          
         case Actions.TurnLeft:
-          this._rover.turnLeft();
-          break;
+          return this._rover.turnLeft();
+          
         case Actions.TurnRight:
-          this._rover.turnRight();
-          break;
+          return this._rover.turnRight();
       }
     });
   }

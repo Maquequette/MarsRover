@@ -44,8 +44,6 @@ export class Position {
   }
 
   goIfValidPosition(position: Position) {
-    console.log(position);
-    console.log(this._planet.hasObstacles(position));
     if (!this._planet.hasObstacles(position)) {
       return position;
     }

@@ -34,8 +34,6 @@ export class Point {
   }
 
   public isSamePoint(point: Point): boolean {
-    console.log(this._latitude, this._longitude, point._latitude, point._longitude)
-    console.log(this._latitude === point._latitude && this._longitude === point._longitude)
     return (
       this._latitude.equal(point._latitude) &&
       this._longitude.equal(point._longitude)
