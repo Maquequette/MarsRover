@@ -36,7 +36,7 @@ export class Position {
     );
   }
 
-  isSamePosition(position: Position) {
+  isSamePosition(position: Position): boolean {
     return position._point.isSamePoint(this._point);
   }
 
@@ -45,6 +45,8 @@ export class Position {
   }
 
   goIfValidPosition(position: Position) {
+    console.log(position);
+    console.log(this._planet.hasObstacles(position));
     if (!this._planet.hasObstacles(position)) {
       return position;
     }

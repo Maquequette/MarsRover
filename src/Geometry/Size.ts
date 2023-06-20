@@ -8,6 +8,6 @@ export class Size {
   }
 
   public normalize(value: number): Coordinate {
-    return new Coordinate(((value % this._value) % -this._value) + this._value);
+    return new Coordinate( (((value % this._value) % -this._value) + this._value) % this._value );
   }
 }

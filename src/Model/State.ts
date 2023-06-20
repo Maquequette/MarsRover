@@ -27,14 +27,14 @@ export class State {
   public decreaseLongitude(): State {
     return new State(
       this.orientation,
-      this.position.decrementLatitudeIfAvailable()
+      this.position.decrementLongitudeIfAvailable()
     );
   }
 
   public increasedLongitude(): State {
     return new State(
       this.orientation,
-      this.position.incrementLatitudeIfAvailable()
+      this.position.incrementLongitudeIfAvailable()
     );
   }
 

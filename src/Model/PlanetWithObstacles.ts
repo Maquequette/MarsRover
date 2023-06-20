@@ -12,7 +12,6 @@ export class PlanetWithObstacles extends Planet {
   }
 
   hasObstacles(position: Position): boolean {
-    console.log('ici');
     return this._obstacles.some((obs: Obstacle) => obs.hasObstacle(position));
   }
 }

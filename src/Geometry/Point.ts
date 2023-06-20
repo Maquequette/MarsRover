@@ -33,13 +33,9 @@ export class Point {
     return new Point(this._latitude.substract(), this._longitude);
   }
 
-  public add(point: Point): Point {
-    return new Point(this._latitude.add(), this._longitude.add());
-  }
-
   public isSamePoint(point: Point): boolean {
-    console.log('là')
     console.log(this._latitude, this._longitude, point._latitude, point._longitude)
+    console.log(this._latitude === point._latitude && this._longitude === point._longitude)
     return (
       this._latitude === point._latitude && this._longitude === point._longitude
     );
