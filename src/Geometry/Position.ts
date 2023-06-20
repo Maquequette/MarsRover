@@ -36,7 +36,7 @@ export class Position {
   }
 
   isSamePosition(position: Position) {
-    return position._point.isSamePoint(this._point);
+    return this._point.isSamePoint(position._point);
   }
 
   normalize(width: Size, height: Size): Point {
