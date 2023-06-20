@@ -1,39 +1,32 @@
-import { Position } from "./Position"
-import { Orientation } from "../Enum/Orientation"
-import { Actions } from "../Enum/Actions"
+import { Orientation } from "../Enum/Orientation";
+import { Position } from "../Geometry/Position";
+import { State } from "./State";
 
 export class Rover {
-  
-  private position: Position;
-  private orientation: Orientation;
+  private _state: State;
 
   constructor(orientation: Orientation, position: Position) {
-    this.position = position;
-    this.orientation = orientation;
+    this._state = new State(orientation, position);
   }
 
-  public turnLeft(): void {
-    this.orientation = this.orientation.RotationAntihoraire()
+  turnLeft() {
+    this._state = this._state.counterClockwiseRotation();
+    return this._state;
   }
 
-  public turnRight(): void {
-    this.orientation = this.orientation.RotationHoraire()
+  turnRight() {
+    this._state = this._state.clockwiseRotation();
+    return this._state;
   }
 
-  public moveForward(): void {
-    this.position = this.position.move(this.orientation)
+  moveForward() {
+    this._state = this._state.moveForward();
+    return this._state;
   }
 
-  public movebackward(): void {
-    this.position = this.position.move(this.orientation)
-  }
-
-  public getOrientation(): Orientation {
-    return this.orientation
-  }
-
-  public getPosition(): Position {
-    return this.position
+  movebackward() {
+    this._state = this._state.moveBackward();
+    return this._state;
   }
 
   // private setPosition(position: Position): void {

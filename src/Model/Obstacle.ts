@@ -1,17 +1,13 @@
-import { Position } from "./Position"
+import { Position } from "../Geometry/Position";
 
 export class Obstacle {
-  private position: Position
+  private readonly _position: Position;
 
   constructor(position: Position) {
-    this.position = position
+    this._position = position;
   }
 
-  public getPosition(): Position {
-    return this.position
-  }
-
-  public setPosition(position: Position): void {
-    //this.position.setPosition(position)
+  hasObstacle(position: Position): boolean {
+    return this._position.isSamePosition(position);
   }
 }

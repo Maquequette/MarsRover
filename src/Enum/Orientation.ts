@@ -9,7 +9,7 @@ export class Orientation {
     this._representation = representation;
   }
 
-  RotationHoraire(): Orientation {
+  clockwiseRotation(): Orientation {
     switch (this) {
       case Orientation.East:
         return Orientation.South;
@@ -22,7 +22,7 @@ export class Orientation {
     }
   }
 
-  RotationAntihoraire(): Orientation {
+  counterClockwiseRotation(): Orientation {
     switch (this) {
       case Orientation.East:
         return Orientation.North;

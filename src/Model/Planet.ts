@@ -1,37 +1,21 @@
-import { Position } from "./Position"
-import { Obstacle } from "./Obstacle"
-import { Coordinate } from "./Coordinate"
+import { Size } from "../Geometry/Size";
+import { Point } from "../Geometry/Point";
+import { Position } from "../Geometry/Position";
 
 export class Planet {
+  private readonly _width: Size;
+  private readonly _height: Size;
 
-  private readonly _width: number
-  private readonly _height: number
-  private readonly _obstacles: Array<Obstacle>
-
-  constructor(width: number, height: number, obstacles: Array<Obstacle>) {
-    this._width = width
-    this._height = height
-    this._obstacles = obstacles
+  constructor(width: Size, height: Size, hasObstacles: boolean) {
+    this._width = width;
+    this._height = height;
   }
 
-  toNormalize(point: Coordinate): Coordinate {
-    return point.normalize(this._width, this._height)
+  normalize(point: Point): Point {
+    return point.normalize(this._width, this._height);
   }
 
-  // hasObstacle(position: Position): boolean {
-  //   let hasObstacle = false;
-  //   this._obstacles.map((obstacle) => {
-  //     return (
-  //       obstacle.getPosition().getX() === position.getX() ||
-  //       obstacle.getPosition().getY() === position.getY()
-  //     );
-  //   });
-  //   return hasObstacle;
-  // }
-}
-
-class ObstacleError extends Error {
-  constructor(message: string) {
-    super(message)
+  hasObstacles(position: Position): boolean {
+    return false;
   }
 }
