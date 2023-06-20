@@ -12,7 +12,7 @@ export class Remote {
     actions.map((action: Actions) => {
       switch (action) {
         case Actions.MoveBackward:
-          this._rover.movebackward();
+          this._rover.moveBackward();
           break;
         case Actions.MoveForward:
           this._rover.moveForward();

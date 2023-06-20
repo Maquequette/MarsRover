@@ -12,8 +12,8 @@ export class Point {
 
   public normalize(width: Size, height: Size): Point {
     return new Point(
-      this._latitude.normalize(width),
-      this._longitude.normalize(height)
+      this._latitude.normalize(height),
+      this._longitude.normalize(width)
     );
   }
 
@@ -37,7 +37,8 @@ export class Point {
     console.log(this._latitude, this._longitude, point._latitude, point._longitude)
     console.log(this._latitude === point._latitude && this._longitude === point._longitude)
     return (
-      this._latitude === point._latitude && this._longitude === point._longitude
+      this._latitude.equal(point._latitude) &&
+      this._longitude.equal(point._longitude)
     );
   }
 }

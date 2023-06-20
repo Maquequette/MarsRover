@@ -1,30 +1,31 @@
 import { Orientation } from "../Enum/Orientation";
 import { Position } from "../Geometry/Position";
+import { RoverInterface } from "../Interface/RoverInterface";
 import { State } from "./State";
 
-export class Rover {
+export class Rover implements RoverInterface {
   private _state: State;
 
   constructor(orientation: Orientation, position: Position) {
     this._state = new State(orientation, position);
   }
 
-  turnLeft() {
+  turnLeft(): State {
     this._state = this._state.counterClockwiseRotation();
     return this._state;
   }
 
-  turnRight() {
+  turnRight(): State {
     this._state = this._state.clockwiseRotation();
     return this._state;
   }
 
-  moveForward() {
+  moveForward(): State {
     this._state = this._state.moveForward();
     return this._state;
   }
 
-  movebackward() {
+  moveBackward(): State {
     this._state = this._state.moveBackward();
     return this._state;
   }
