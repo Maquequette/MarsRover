@@ -18,28 +18,25 @@ export class Point {
   }
 
   public incrementLongitude(): Point {
-    return new Point(this._latitude.add(), this._longitude);
-  }
-
-  public decrementLongitude(): Point {
-    return new Point(this._latitude.substract(), this._longitude);
-  }
-
-  public incrementLatitude(): Point {
     return new Point(this._latitude, this._longitude.add());
   }
 
-  public decrementLatitude(): Point {
+  public decrementLongitude(): Point {
     return new Point(this._latitude, this._longitude.substract());
   }
 
-  public add(point: Point): Point {
-    return new Point(this._latitude.add(), this._longitude.add());
+  public incrementLatitude(): Point {
+    return new Point(this._latitude.add(), this._longitude);
+  }
+
+  public decrementLatitude(): Point {
+    return new Point(this._latitude.substract(), this._longitude);
   }
 
   public isSamePoint(point: Point): boolean {
     return (
-      this._latitude === point._latitude && this._longitude === point._longitude
+      this._latitude.equal(point._latitude) &&
+      this._longitude.equal(point._longitude)
     );
   }
 }

@@ -18,4 +18,8 @@ export class Coordinate {
   public add(): Coordinate {
     return new Coordinate(this._value + 1);
   }
+
+  public equal(coordinate: Coordinate): boolean {
+    return this._value === coordinate._value;
+  }
 }
