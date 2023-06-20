@@ -1,5 +1,7 @@
 import { Planet } from "../Model/Planet";
+import { PlanetWithObstacles } from "../Model/PlanetWithObstacles";
 import { Point } from "./Point";
+import { Size } from "./Size";
 
 export class Position {
   private readonly _point: Point;
@@ -38,7 +40,7 @@ export class Position {
     return position._point.isSamePoint(this._point);
   }
 
-  normalize(width: number, height: number): Point {
+  normalize(width: Size, height: Size): Point {
     return this._point.normalize(width, height);
   }
 

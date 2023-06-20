@@ -1,16 +1,14 @@
-import { Obstacle } from "./Obstacle";
-import { Position } from "../Geometry/Position";
+import { Size } from "../Geometry/Size";
 import { Point } from "../Geometry/Point";
+import { Position } from "../Geometry/Position";
 
 export class Planet {
-  private readonly _width: number;
-  private readonly _height: number;
-  private readonly _obstacles: Array<Obstacle>;
+  private readonly _width: Size;
+  private readonly _height: Size;
 
-  constructor(width: number, height: number, obstacles: Array<Obstacle>) {
+  constructor(width: Size, height: Size, hasObstacles: boolean) {
     this._width = width;
     this._height = height;
-    this._obstacles = obstacles;
   }
 
   normalize(point: Point): Point {
@@ -18,10 +16,6 @@ export class Planet {
   }
 
   hasObstacles(position: Position): boolean {
-    return this._obstacles.some((obs: Obstacle) => obs.hasObstacle(position));
-  }
-
-  getSize() {
-    return { width: this._width, height: this._height };
+    return false;
   }
 }

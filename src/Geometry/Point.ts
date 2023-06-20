@@ -1,44 +1,45 @@
-export class Point {
-  private readonly latitude: number;
-  private readonly longitude: number;
+import { Coordinate } from "./Coordinate";
+import { Size } from "./Size";
 
-  constructor(latitude: number, longitude: number) {
-    this.latitude = latitude == -0 ? 0 : latitude;
-    this.longitude = longitude == -0 ? 0 : longitude;
+export class Point {
+  private readonly _latitude: Coordinate;
+  private readonly _longitude: Coordinate;
+
+  constructor(latitude: Coordinate, longitude: Coordinate) {
+    this._latitude = latitude;
+    this._longitude = longitude;
   }
 
-  public normalize(width: number, height: number): Point {
-    const Lng = ((this.longitude % width) % -width) + width;
-    const Lat = ((this.latitude % height) % -height) + height;
-    return new Point(Lat, Lng);
+  public normalize(width: Size, height: Size): Point {
+    return new Point(
+      this._latitude.normalize(width),
+      this._longitude.normalize(height)
+    );
   }
 
   public incrementLongitude(): Point {
-    return new Point(this.latitude + 1, this.longitude);
+    return new Point(this._latitude.add(), this._longitude);
   }
 
   public decrementLongitude(): Point {
-    return new Point(this.latitude - 1, this.longitude);
+    return new Point(this._latitude.substract(), this._longitude);
   }
 
   public incrementLatitude(): Point {
-    return new Point(this.latitude, this.longitude + 1);
+    return new Point(this._latitude, this._longitude.add());
   }
 
   public decrementLatitude(): Point {
-    return new Point(this.latitude, this.longitude - 1);
+    return new Point(this._latitude, this._longitude.substract());
   }
 
   public add(point: Point): Point {
-    return new Point(
-      this.latitude + point.latitude,
-      this.longitude + point.longitude
-    );
+    return new Point(this._latitude.add(), this._longitude.add());
   }
 
   public isSamePoint(point: Point): boolean {
     return (
-      this.latitude === point.latitude && this.longitude === point.longitude
+      this._latitude === point._latitude && this._longitude === point._longitude
     );
   }
 }
