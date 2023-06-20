@@ -1,5 +1,4 @@
 import { Planet } from "../Model/Planet";
-import { PlanetWithObstacles } from "../Model/PlanetWithObstacles";
 import { Point } from "./Point";
 import { Size } from "./Size";
 
