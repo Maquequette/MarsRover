@@ -1,15 +1,14 @@
 import { Obstacle } from "./Obstacle";
-import { Position } from "../Geometry/Position";
 import { Planet } from "./Planet";
 import { Point } from "../Geometry/Point";
 import { Size } from "../Geometry/Size";
 
 export class PlanetWithObstacles extends Planet {
-  private readonly _obstacles: Array<Obstacle> = [];
+  private readonly _obstacles: Array<Obstacle>;
 
-  constructor(size: Size, obstacles: Obstacle[]) {
+  constructor(size: Size, obstacles?: Obstacle[]) {
     super(size);
-    this._obstacles = [];
+    this._obstacles = obstacles ?? [];
   }
 
   hasObstacles(point: Point): boolean {
