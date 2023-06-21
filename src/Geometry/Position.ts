@@ -39,12 +39,8 @@ export class Position {
     return position._point.isSamePoint(this._point);
   }
 
-  normalize(width: Size, height: Size): Point {
-    return this._point.normalize(width, height);
-  }
-
   goIfValidPosition(position: Position) {
-    if (!this._planet.hasObstacles(position)) {
+    if (!this._planet.hasObstacles(position._point)) {
       return position;
     }
     return this;

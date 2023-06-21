@@ -1,13 +1,14 @@
+import { Point } from "../Geometry/Point";
 import { Position } from "../Geometry/Position";
 
 export class Obstacle {
-  private readonly _position: Position;
+  private readonly _point: Point;
 
-  constructor(position: Position) {
-    this._position = position;
+  constructor(point: Point) {
+    this._point = point;
   }
 
-  hasObstacle(position: Position): boolean {
-    return this._position.isSamePosition(position);
+  hasObstacle(point: Point): boolean {
+    return this._point.isSamePoint(point);
   }
 }

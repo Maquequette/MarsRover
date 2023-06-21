@@ -1,4 +1,5 @@
 import { Coordinate } from "./Coordinate";
+import { Position } from "./Position";
 import { Size } from "./Size";
 
 export class Point {
@@ -10,10 +11,10 @@ export class Point {
     this._longitude = longitude;
   }
 
-  public normalize(width: Size, height: Size): Point {
+  public normalize(point: Point): Point {
     return new Point(
-      this._latitude.normalize(height),
-      this._longitude.normalize(width)
+      this._latitude.normalize(point._latitude),
+      this._longitude.normalize(point._longitude)
     );
   }
 

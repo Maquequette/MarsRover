@@ -1,5 +1,3 @@
-import { Size } from "./Size";
-
 export class Coordinate {
   private readonly _value: number;
 
@@ -7,8 +5,12 @@ export class Coordinate {
     this._value = value;
   }
 
-  public normalize(size: Size): Coordinate {
-    return size.normalize(this._value);
+  public normalize(coordinate: Coordinate): Coordinate {
+    return new Coordinate(
+      (((this._value % coordinate._value) % -coordinate._value) +
+        coordinate._value) %
+        coordinate._value
+    );
   }
 
   public substract(): Coordinate {
