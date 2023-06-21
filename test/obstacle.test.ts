@@ -7,7 +7,9 @@ import { State } from "../src/Model/State";
 import { CartesianData } from "./utilities/cartesianData";
 import { PlanetWithObstacles } from "../src/Model/PlanetWithObstacles";
 import { Obstacle } from "../src/Model/Obstacle";
-import { PositionBuilder } from "./utilities/PositionBuilder";
+import { PositionBuilder } from "./utilities/Builder/PositionBuilder";
+import { Point } from "../src/Geometry/Point";
+import { Coordinate } from "../src/Geometry/Coordinate";
 const each = require("jest-each").default;
 
 describe("obstacle", () => {
@@ -19,21 +21,22 @@ describe("obstacle", () => {
       Orientation.West,
     ]).toTestCases()
   ).it("%s", (orientation: Orientation) => {
-    const planetWithObstacles = new PlanetWithObstacles(2, 2, [
-      new Obstacle(new PositionBuilder(0, 1).build()),
-      new Obstacle(new PositionBuilder(1, 0).build()),
-      new Obstacle(new PositionBuilder(1, 1).build()),
+    const planetWithObstacles = new PlanetWithObstacles( new Size( new Coordinate(2), new Coordinate(2)), [
+      new Obstacle( new Point( new Coordinate(0), new Coordinate(1)) ),
+      new Obstacle( new Point( new Coordinate(1), new Coordinate(0)) ),
+      new Obstacle( new Point( new Coordinate(1), new Coordinate(1)) )
     ]);
 
     const wall_e: Rover = new Rover(
       orientation,
-      new PositionBuilder(0, 0).build(),
+      new PositionBuilder(0, 0, planetWithObstacles).build(),
     );
 
     let final: State = new State(
       orientation,
-      new PositionBuilder(0, 0).build()
+      new PositionBuilder(0, 0, planetWithObstacles).build()
     );
+    
     let received: State = wall_e.moveForward();
 
     expect(received).toStrictEqual(final);

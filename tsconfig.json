@@ -1,5 +1,5 @@
 {
-  "include": ["./src/**/*.ts", "test/utilities/PositionBuilder.ts"],
+  "include": ["./src/**/*.ts", "test/utilities/Builder/PositionBuilder.ts"],
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "outDir": "./dist/",

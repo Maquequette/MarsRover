@@ -7,7 +7,9 @@ import { CartesianData } from "./utilities/cartesianData";
 import { Actions } from "../src/Enum/Actions";
 import { Remote } from "../src/Decorator/Remote";
 import { actionToFunction } from "./utilities/remoteHandler";
-import { PositionBuilder } from "./utilities/PositionBuilder";
+import { PositionBuilder } from "./utilities/Builder/PositionBuilder";
+import { Size } from "../src/Geometry/Size";
+import { Coordinate } from "../src/Geometry/Coordinate";
 const each = require("jest-each").default;
 
 describe("remote => basic usage", () => {
@@ -42,17 +44,16 @@ describe("remote => basic usage", () => {
       planetSize: number,
       action: Actions
     ) => {
-      const planet = new Planet(planetSize, planetSize);
+      const planet = new Planet( new Size( new Coordinate(planetSize), new Coordinate(planetSize)) );
 
       const wall_1: Rover = new Rover(
         orientation,
-        new PositionBuilder(latStart, lngStart).build(),
-        planet
+        new PositionBuilder(latStart, lngStart, planet).build(),
       );
+
       const wall_2: Rover = new Rover(
         orientation,
-        new PositionBuilder(latStart, lngStart).build(),
-        planet
+        new PositionBuilder(latStart, lngStart, planet).build()
       );
       const remote = new Remote(wall_2);
 
@@ -81,18 +82,17 @@ describe("remote => defined complex usage", () => {
   each(new CartesianData([Orientation.North]).toTestCases()).it(
     "orientation: %s",
     (orientation: Orientation) => {
-      const planet = new Planet(5, 5);
+      const planet = new Planet( new Size( new Coordinate(5), new Coordinate(5)) );
 
       const wall_e: Rover = new Rover(
         orientation,
-        new PositionBuilder(0, 0).build(),
-        planet
+        new PositionBuilder(0, 0, planet).build()
       );
 
       const remote = new Remote(wall_e);
       let final: State = new State(
         orientation,
-        new PositionBuilder(4, 1).build()
+        new PositionBuilder(4, 1, planet).build()
       );
       let received: Array<State> = remote.setActions(commands);
       expect(received.at(-1)).toStrictEqual(final);

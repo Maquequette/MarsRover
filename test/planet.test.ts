@@ -4,7 +4,9 @@ import { Rover } from "../src/Model/Rover";
 import { CartesianData } from "./utilities/cartesianData";
 import { State } from "../src/Model/State";
 import { Position } from "../src/Geometry/Position";
-import { PositionBuilder } from "./utilities/PositionBuilder";
+import { PositionBuilder } from "./utilities/Builder/PositionBuilder";
+import { Size } from "../src/Geometry/Size";
+import { Coordinate } from "../src/Geometry/Coordinate";
 const each = require("jest-each").default;
 
 const planetSizes: Array<number> = [1, 10];
@@ -32,7 +34,7 @@ describe("planet", () => {
       lngStart: number,
       planetSize: number
     ) => {
-      const planet = new Planet(planetSize, planetSize);
+      const planet = new Planet( new Size( new Coordinate(planetSize), new Coordinate(planetSize)) );
       const startPosition: Position = new PositionBuilder(
         latStart,
         lngStart,
@@ -43,7 +45,7 @@ describe("planet", () => {
 
       const wall_e: Rover = new Rover(
         orientation,
-        new PositionBuilder(latStart, lngStart).build()
+        new PositionBuilder(latStart, lngStart, planet).build()
       );
 
       let received: State | null = null;

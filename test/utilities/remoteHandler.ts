@@ -20,11 +20,13 @@ function actionToFunction(action: Actions, rover: Rover): State {
 
 function generateCommands(nbIteration: number): Array<Actions> {
   let commands: Array<Actions> = [];
-  const values = Object.keys(Actions);
+  const keys = Object.keys(Actions);
+  const values = Object.values(Actions);
 
   for (let i = 0; i <= nbIteration; i++) {
-    let enumKey = values[Math.round(Math.random() * values.length)];
-    commands.push(Actions[enumKey]);
+    let enumKey = keys[Math.floor(Math.random() * keys.length)];
+    let index = keys.findIndex( x => enumKey === x);
+    commands.push(values[index]);
   }
 
   return commands;

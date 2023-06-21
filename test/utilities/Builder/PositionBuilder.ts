@@ -1,7 +1,7 @@
-import { Coordinate } from "../../src/Geometry/Coordinate";
-import { Point } from "../../src/Geometry/Point";
-import { Position } from "../../src/Geometry/Position";
-import { Planet } from "../../src/Model/Planet";
+import { Coordinate } from "../../../src/Geometry/Coordinate";
+import { Point } from "../../../src/Geometry/Point";
+import { Position } from "../../../src/Geometry/Position";
+import { Planet } from "../../../src/Model/Planet";
 
 export class PositionBuilder {
   private readonly _latitude: Coordinate;

@@ -1,17 +1,14 @@
 import { Remote } from "../src/Decorator/Remote";
 import { Orientation } from "../src/Enum/Orientation";
 import { Coordinate } from "../src/Geometry/Coordinate";
-import { Point } from "../src/Geometry/Point";
-import { Position } from "../src/Geometry/Position";
 import { Size } from "../src/Geometry/Size";
-import { Planet } from "../src/Model/Planet";
 import { Rover } from "../src/Model/Rover";
 import { State } from "../src/Model/State";
 import { actionToFunction, generateCommands } from "./utilities/remoteHandler";
 import { CartesianData } from "./utilities/cartesianData";
 import { generateObstacles } from "./utilities/generateObstacles";
 import { PlanetWithObstacles } from "../src/Model/PlanetWithObstacles";
-import { PositionBuilder } from "./utilities/PositionBuilder";
+import { PositionBuilder } from "./utilities/Builder/PositionBuilder";
 const each = require("jest-each").default;
 
 describe("TOTAL => EXTREME RANDOM COMPLEX USAGE WITH OBSTACLES", () => {
@@ -46,8 +43,7 @@ describe("TOTAL => EXTREME RANDOM COMPLEX USAGE WITH OBSTACLES", () => {
       nbObstacle: number
     ) => {
       const planetWithObstacles = new PlanetWithObstacles(
-        planetSize,
-        planetSize,
+        new Size( new Coordinate(planetSize), new Coordinate(planetSize)),
         generateObstacles(nbObstacle, planetSize)
       );
       const commands = generateCommands(nbCommand);
@@ -55,8 +51,7 @@ describe("TOTAL => EXTREME RANDOM COMPLEX USAGE WITH OBSTACLES", () => {
       //===
       const wall_1: Rover = new Rover(
         orientation,
-        new PositionBuilder(latStart, lngStart).build(),
-        planetWithObstacles
+        new PositionBuilder(latStart, lngStart, planetWithObstacles).build()
       );
       let final: Array<State> = [];
       for (let i = 0; i <= commands.length - 1; i++) {
@@ -66,8 +61,7 @@ describe("TOTAL => EXTREME RANDOM COMPLEX USAGE WITH OBSTACLES", () => {
       //===
       const wall_2: Rover = new Rover(
         orientation,
-        new PositionBuilder(latStart, lngStart).build(),
-        planetWithObstacles
+        new PositionBuilder(latStart, lngStart, planetWithObstacles).build()
       );
       const remote = new Remote(wall_2);
       let received: Array<State> = remote.setActions(commands);
