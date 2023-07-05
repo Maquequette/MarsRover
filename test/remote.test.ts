@@ -4,11 +4,12 @@ import { RoverInterface } from "../src/Rover/Interface/RoverInterface";
 import { Rover } from "../src/Rover/Rover";
 import { State } from "../src/Rover/State";
 import { CartesianData } from "./utilities/cartesianData";
-import { Interpreter } from "../src/Rover/Decorator/Interpreter";
+import { Interpreter } from "../src/Rover/Interpreter";
 import { actionToFunction } from "./utilities/remoteHandler";
 import { PositionBuilder } from "./utilities/Builder/PositionBuilder";
 import { Size } from "../src/Topology/Geometry/Size";
 import { Coordinate } from "../src/Topology/Geometry/Coordinate";
+import { Actions } from "../src/Rover/Enum/Actions";
 const each = require("jest-each").default;
 
 describe("remote => basic usage", () => {
@@ -27,7 +28,12 @@ describe("remote => basic usage", () => {
       latStarts,
       lngStarts,
       planetSizes,
-      ["F", "B", "L", "R"]
+      [
+        Actions.MoveForward,
+        Actions.MoveBackward,
+        Actions.TurnLeft,
+        Actions.TurnRight,
+      ]
     ).toTestCases()
   ).it(
     "orientation: %s, lat: %s, lng: %s, planetSize: %s, action: %s",

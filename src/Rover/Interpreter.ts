@@ -1,8 +1,8 @@
-import { Actions } from "../Enum/Actions";
-import { RoverInterface } from "../Interface/RoverInterface";
-import { State } from "../State";
+import { Actions } from "./Enum/Actions";
+import { RoverInterface } from "./Interface/RoverInterface";
+import { State } from "./State";
 
-export class Interpreter implements RoverInterface {
+export class Interpreter {
   private readonly _rover: RoverInterface;
 
   constructor(rover: RoverInterface) {
@@ -14,11 +14,11 @@ export class Interpreter implements RoverInterface {
 
     return arrayCommands.map((command: string): State => {
       switch (command) {
-        case "F":
+        case Actions.MoveForward:
           return this.moveForward();
-        case "B":
+        case Actions.MoveBackward:
           return this.moveBackward();
-        case "R":
+        case Actions.TurnRight:
           return this.turnRight();
         default:
           return this.turnLeft();

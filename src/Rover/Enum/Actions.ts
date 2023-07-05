@@ -1,6 +1,6 @@
 export enum Actions {
-  MoveForward = "moveForward",
-  MoveBackward = "moveBackward",
-  TurnLeft = "turnLeft",
-  TurnRight = "turnRight",
+  MoveForward = "F",
+  MoveBackward = "B",
+  TurnLeft = "L",
+  TurnRight = "R",
 }
