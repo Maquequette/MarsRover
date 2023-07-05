@@ -1,6 +1,6 @@
-import { Orientation } from "../Enum/Orientation";
-import { Position } from "../Geometry/Position";
-import { RoverInterface } from "../Interface/RoverInterface";
+import { Orientation } from "../Topology/Geometry/Enum/Orientation";
+import { Position } from "../Topology/Geometry/Position";
+import { RoverInterface } from "./Interface/RoverInterface";
 import { State } from "./State";
 
 export class Rover implements RoverInterface {

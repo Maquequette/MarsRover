@@ -1,6 +1,4 @@
 import { Coordinate } from "./Coordinate";
-import { Position } from "./Position";
-import { Size } from "./Size";
 
 export class Point {
   private readonly _latitude: Coordinate;

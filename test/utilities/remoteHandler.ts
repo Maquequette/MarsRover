@@ -1,35 +1,33 @@
-import { Actions } from "../../src/Enum/Actions";
-import { Rover } from "../../src/Model/Rover";
-import { State } from "../../src/Model/State";
+import { Actions } from "../../src/Rover/Enum/Actions";
+import { RoverInterface } from "../../src/Rover/Interface/RoverInterface";
+import { State } from "../../src/Rover/State";
 
-function actionToFunction(action: Actions, rover: Rover): State {
+function actionToFunction(action: string, rover: RoverInterface): State {
   switch (action) {
-    case Actions.MoveForward:
+    case "F":
       return rover.moveForward();
 
-    case Actions.MoveBackward:
+    case "B":
       return rover.moveBackward();
 
-    case Actions.TurnLeft:
+    case "L":
       return rover.turnLeft();
 
-    case Actions.TurnRight:
+    default:
       return rover.turnRight();
   }
 }
 
-function generateCommands(nbIteration: number): Array<Actions> {
-  let commands: Array<Actions> = [];
-  const keys = Object.keys(Actions);
-  const values = Object.values(Actions);
+function getActions(nbIteration: number): string {
+  let commands: string = "";
+  const possibility = ["F", "B", "L", "R"];
 
   for (let i = 0; i <= nbIteration; i++) {
-    let enumKey = keys[Math.floor(Math.random() * keys.length)];
-    let index = keys.findIndex( x => enumKey === x);
-    commands.push(values[index]);
+    let value = possibility[Math.floor(Math.random() * possibility.length)];
+    commands.concat(value);
   }
 
   return commands;
 }
 
-export { actionToFunction, generateCommands };
+export { actionToFunction, getActions };

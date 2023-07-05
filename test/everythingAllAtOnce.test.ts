@@ -1,13 +1,14 @@
-import { Remote } from "../src/Decorator/Remote";
-import { Orientation } from "../src/Enum/Orientation";
-import { Coordinate } from "../src/Geometry/Coordinate";
-import { Size } from "../src/Geometry/Size";
-import { Rover } from "../src/Model/Rover";
-import { State } from "../src/Model/State";
-import { actionToFunction, generateCommands } from "./utilities/remoteHandler";
+import { Interpreter } from "../src/Rover/Decorator/Interpreter";
+import { Orientation } from "../src/Topology/Geometry/Enum/Orientation";
+import { Coordinate } from "../src/Topology/Geometry/Coordinate";
+import { Size } from "../src/Topology/Geometry/Size";
+import { Rover } from "../src/Rover/Rover";
+import { RoverInterface } from "../src/Rover/Interface/RoverInterface";
+import { State } from "../src/Rover/State";
+import { actionToFunction, getActions } from "./utilities/remoteHandler";
 import { CartesianData } from "./utilities/cartesianData";
 import { generateObstacles } from "./utilities/generateObstacles";
-import { PlanetWithObstacles } from "../src/Model/PlanetWithObstacles";
+import { PlanetWithObstacles } from "../src/Topology/Planet/PlanetWithObstacles";
 import { PositionBuilder } from "./utilities/Builder/PositionBuilder";
 const each = require("jest-each").default;
 
@@ -43,28 +44,29 @@ describe("TOTAL => EXTREME RANDOM COMPLEX USAGE WITH OBSTACLES", () => {
       nbObstacle: number
     ) => {
       const planetWithObstacles = new PlanetWithObstacles(
-        new Size( new Coordinate(planetSize), new Coordinate(planetSize)),
+        new Size(new Coordinate(planetSize), new Coordinate(planetSize)),
         generateObstacles(nbObstacle, planetSize)
       );
-      const commands = generateCommands(nbCommand);
+      const commands = getActions(nbCommand);
 
       //===
-      const wall_1: Rover = new Rover(
+      const wall_1: RoverInterface = new Rover(
         orientation,
         new PositionBuilder(latStart, lngStart, planetWithObstacles).build()
       );
       let final: Array<State> = [];
-      for (let i = 0; i <= commands.length - 1; i++) {
-        final.push(actionToFunction(commands[i], wall_1));
+      const arrayCmd = commands.split("");
+      for (let i = 0; i <= arrayCmd.length - 1; i++) {
+        final.push(actionToFunction(arrayCmd[i], wall_1));
       }
 
       //===
-      const wall_2: Rover = new Rover(
+      const wall_2: RoverInterface = new Rover(
         orientation,
         new PositionBuilder(latStart, lngStart, planetWithObstacles).build()
       );
-      const remote = new Remote(wall_2);
-      let received: Array<State> = remote.setActions(commands);
+      const remote = new Interpreter(wall_2);
+      let received: Array<State> = remote.interpret(commands);
 
       expect(received).toStrictEqual(final);
     }
