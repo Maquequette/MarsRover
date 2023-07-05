@@ -9,10 +9,10 @@ export class Interpreter {
     this._rover = rover;
   }
 
-  public interpret(commands: string): Array<State> {
-    const arrayCommands = commands.split("");
+  public interpret(commands: any): Array<State> {
+    const arrayCommands: Array<Actions> = commands.split("");
 
-    return arrayCommands.map((command: string): State => {
+    return arrayCommands.map((command: Actions): State => {
       switch (command) {
         case Actions.MoveForward:
           return this.moveForward();

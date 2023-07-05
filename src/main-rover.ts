@@ -17,3 +17,4 @@ const transreicever = new TransceiverPassive();
 const interpreter = new Interpreter(wall_e);
 
 const controller = new RoverController(interpreter, transreicever);
+controller.connect();

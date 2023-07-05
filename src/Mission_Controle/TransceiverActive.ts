@@ -7,7 +7,12 @@ export class TransceiverActive {
     this._socket = io("http://localhost:3000");
   }
 
-  public setAction(action: string): void {
-    this._socket.emit("command", { action });
+  public setAction(action: string) {
+    this._socket.emit("action", action);
+    // return new Promise((resolve) => {
+    //   , (response: any) => {
+    //     resolve(response);
+    //   });
+    // });
   }
 }

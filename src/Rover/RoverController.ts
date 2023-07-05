@@ -1,3 +1,4 @@
+import { Actions } from "./Enum/Actions";
 import { Interpreter } from "./Interpreter";
 import { TransceiverPassive } from "./TransceiverPassive";
 
@@ -15,7 +16,7 @@ export class RoverController {
     this._transceiver.handleCommand(this.onCommand);
   }
 
-  onCommand(action: string) {
-    console.log(action);
+  private onCommand(action: string) {
+    this._interpreter.interpret(action);
   }
 }
