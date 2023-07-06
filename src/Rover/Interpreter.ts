@@ -2,7 +2,7 @@ import { Actions } from "./Enum/Actions";
 import { RoverInterface } from "./Interface/RoverInterface";
 import { State } from "./State";
 
-export class Interpreter {
+export class Interpreter implements RoverInterface {
   private readonly _rover: RoverInterface;
 
   constructor(rover: RoverInterface) {

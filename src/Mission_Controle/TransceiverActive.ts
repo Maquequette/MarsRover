@@ -9,10 +9,11 @@ export class TransceiverActive {
 
   public setAction(action: string) {
     this._socket.emit("action", action);
-    // return new Promise((resolve) => {
-    //   , (response: any) => {
-    //     resolve(response);
-    //   });
-    // });
+  }
+
+  public handleState() {
+    this._socket.on("state", () => {
+      console.log("caca");
+    });
   }
 }
