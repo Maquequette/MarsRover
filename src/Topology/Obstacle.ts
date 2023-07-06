@@ -1,6 +1,4 @@
-import { Point } from "../Geometry/Point";
-import { Position } from "../Geometry/Position";
-
+import { Point } from "./Geometry/Point";
 export class Obstacle {
   private readonly _point: Point;
 

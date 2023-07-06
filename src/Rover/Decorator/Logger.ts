@@ -1,5 +1,5 @@
 import { RoverInterface } from "../Interface/RoverInterface.js";
-import { State } from "../Model/State.js";
+import { State } from "../State.js";
 
 export class RoverLogger implements RoverInterface {
   private _logged: RoverInterface;

@@ -7,7 +7,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start:rover": "ts-node src/main-rover.ts",
+    "start:mission": "ts-node src/main-missionControl.ts",
     "test": "jest"
   },
   "author": "",
@@ -15,6 +16,8 @@
   "description": "",
   "dependencies": {
     "jest": "^29.5.0",
+    "socket.io": "^4.7.1",
+    "socket.io-client": "^4.7.1",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1"
   }

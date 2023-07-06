@@ -1,5 +1,4 @@
 import { Size } from "../Geometry/Size";
-import { Position } from "../Geometry/Position";
 import { Point } from "../Geometry/Point";
 
 export class Planet {
@@ -10,7 +9,7 @@ export class Planet {
   }
 
   normalize(point: Point): Point {
-    return point.normalize(this._size.getPointMax());
+    return point.normalize(this._size.getMaxPoint());
   }
 
   hasObstacles(point: Point): boolean {

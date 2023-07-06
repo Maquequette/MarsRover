@@ -1,15 +1,15 @@
-import { Orientation } from "../src/Enum/Orientation";
-import { Position } from "../src/Geometry/Position";
-import { Planet } from "../src/Model/Planet";
-import { Rover } from "../src/Model/Rover";
-import { State } from "../src/Model/State";
+import { Orientation } from "../src/Topology/Geometry/Enum/Orientation";
+import { Planet } from "../src//Topology/Planet/Planet";
+import { RoverInterface } from "../src/Rover/Interface/RoverInterface";
+import { Rover } from "../src/Rover/Rover";
+import { State } from "../src/Rover/State";
 import { CartesianData } from "./utilities/cartesianData";
-import { Actions } from "../src/Enum/Actions";
-import { Remote } from "../src/Decorator/Remote";
+import { Interpreter } from "../src/Rover/Interpreter";
 import { actionToFunction } from "./utilities/remoteHandler";
 import { PositionBuilder } from "./utilities/Builder/PositionBuilder";
-import { Size } from "../src/Geometry/Size";
-import { Coordinate } from "../src/Geometry/Coordinate";
+import { Size } from "../src/Topology/Geometry/Size";
+import { Coordinate } from "../src/Topology/Geometry/Coordinate";
+import { Actions } from "../src/Rover/Enum/Actions";
 const each = require("jest-each").default;
 
 describe("remote => basic usage", () => {
@@ -42,23 +42,25 @@ describe("remote => basic usage", () => {
       latStart: number,
       lngStart: number,
       planetSize: number,
-      action: Actions
+      action: string
     ) => {
-      const planet = new Planet( new Size( new Coordinate(planetSize), new Coordinate(planetSize)) );
-
-      const wall_1: Rover = new Rover(
-        orientation,
-        new PositionBuilder(latStart, lngStart, planet).build(),
+      const planet = new Planet(
+        new Size(new Coordinate(planetSize), new Coordinate(planetSize))
       );
 
-      const wall_2: Rover = new Rover(
+      const wall_1: RoverInterface = new Rover(
         orientation,
         new PositionBuilder(latStart, lngStart, planet).build()
       );
-      const remote = new Remote(wall_2);
+
+      const wall_2: RoverInterface = new Rover(
+        orientation,
+        new PositionBuilder(latStart, lngStart, planet).build()
+      );
+      const remote = new Interpreter(wall_2);
 
       let final: Array<State> = [actionToFunction(action, wall_1)];
-      let received: Array<State> = remote.setActions([action]);
+      let received: Array<State> = remote.interpret(action);
 
       expect(received).toStrictEqual(final);
     }
@@ -66,35 +68,25 @@ describe("remote => basic usage", () => {
 });
 
 describe("remote => defined complex usage", () => {
-  const commands: Array<Actions> = [
-    Actions.MoveForward, // => UP
-    Actions.TurnLeft,
-    Actions.MoveForward, // => LEFT
-    Actions.TurnRight,
-    Actions.MoveBackward, // => DOWN
-    Actions.TurnRight,
-    Actions.MoveForward, // => RIGHT
-    Actions.MoveForward, // => RIGHT
-    Actions.TurnLeft,
-    Actions.MoveBackward, // => DOWN
-  ]; // final position : 4 1
+  const commands: string = "FLFRBRFFLB"; // final position : 4 1
 
   each(new CartesianData([Orientation.North]).toTestCases()).it(
     "orientation: %s",
     (orientation: Orientation) => {
-      const planet = new Planet( new Size( new Coordinate(5), new Coordinate(5)) );
+      const planet = new Planet(new Size(new Coordinate(5), new Coordinate(5)));
 
-      const wall_e: Rover = new Rover(
+      const wall_e: RoverInterface = new Rover(
         orientation,
         new PositionBuilder(0, 0, planet).build()
       );
 
-      const remote = new Remote(wall_e);
+      const remote = new Interpreter(wall_e);
       let final: State = new State(
         orientation,
         new PositionBuilder(4, 1, planet).build()
       );
-      let received: Array<State> = remote.setActions(commands);
+
+      let received: Array<State> = remote.interpret(commands);
       expect(received.at(-1)).toStrictEqual(final);
     }
   );

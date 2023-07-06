@@ -1,7 +1,7 @@
-import { Obstacle } from "./Obstacle";
+import { Obstacle } from "../Obstacle";
 import { Planet } from "./Planet";
-import { Point } from "../Geometry/Point";
 import { Size } from "../Geometry/Size";
+import { Point } from "../Geometry/Point";
 
 export class PlanetWithObstacles extends Planet {
   private readonly _obstacles: Array<Obstacle>;

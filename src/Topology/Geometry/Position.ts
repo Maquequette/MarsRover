@@ -1,6 +1,5 @@
-import { Planet } from "../Model/Planet";
 import { Point } from "./Point";
-import { Size } from "./Size";
+import { Planet } from "../Planet/Planet";
 
 export class Position {
   private readonly _point: Point;

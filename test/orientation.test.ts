@@ -1,9 +1,10 @@
-import { Orientation } from "../src/Enum/Orientation";
-import { Planet } from "../src/Model/Planet";
-import { Rover } from "../src/Model/Rover";
-import { Coordinate } from "../src/Geometry/Coordinate";
-import { Size } from "../src/Geometry/Size";
-import { State } from "../src/Model/State";
+import { Orientation } from "../src/Topology/Geometry/Enum/Orientation";
+import { Planet } from "../src/Topology/Planet/Planet";
+import { Rover } from "../src/Rover/Rover";
+import { RoverInterface } from "../src/Rover/Interface/RoverInterface";
+import { Coordinate } from "../src/Topology/Geometry/Coordinate";
+import { Size } from "../src/Topology/Geometry/Size";
+import { State } from "../src/Rover/State";
 import { PositionBuilder } from "./utilities/Builder/PositionBuilder";
 const each = require("jest-each").default;
 
@@ -33,7 +34,7 @@ describe("orientation", () => {
     [Orientation.South, 1, new State(Orientation.East, position)],
     [Orientation.East, 1, new State(Orientation.North, position)],
   ]).it("%s %s %s", (initial: Orientation, nb: number, final: State) => {
-    const wall_e = new Rover(initial, position);
+    const wall_e: RoverInterface = new Rover(initial, position);
 
     let received: State | null = null;
     for (let nbRotation = 0; nbRotation < nb; nbRotation++) {

@@ -1,7 +1,5 @@
-import { Planet } from "../Model/Planet";
 import { Coordinate } from "./Coordinate";
 import { Point } from "./Point";
-import { Position } from "./Position";
 
 export class Size {
   private _height: Coordinate;
@@ -12,7 +10,7 @@ export class Size {
     this._width = width;
   }
 
-  getPointMax(): Point {
+  getMaxPoint(): Point {
     return new Point(this._width, this._height);
   }
 }

@@ -1,4 +1,5 @@
-import { State } from "../Model/State";
+import { State } from "../State";
+
 export interface RoverInterface {
   turnRight(): State;
   turnLeft(): State;
