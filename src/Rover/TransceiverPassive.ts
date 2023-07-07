@@ -28,4 +28,10 @@ export class TransceiverPassive {
       socket.emit("state", state);
     });
   }
+
+  public emitStates(states: Array<State>) {
+    this._io.on("connection", (socket) => {
+      socket.emit("states", states);
+    });
+  }
 }

@@ -1,4 +1,3 @@
-import { Actions } from "./Enum/Actions";
 import { RoverInterface } from "./Interface/RoverInterface";
 import { Interpreter } from "./Interpreter";
 import { State } from "./State";
@@ -15,24 +14,36 @@ export class RoverController implements RoverInterface {
 
   connect() {
     this._transceiver.listen();
-    this._transceiver.handleCommand(this.onCommand);
+    this._transceiver.handleCommand(this.interpret);
   }
 
-  private onCommand(action: string) {
-    this._interpreter.interpret(action);
+  private interpret(action: string): Array<State> {
+    const states = this._interpreter.interpret(action);
+    this._transceiver.emitStates(states);
+    return states;
   }
 
   turnRight(): State {
-    this._transceiver.emitState(this._interpreter.turnRight());
-    return this._interpreter.turnRight();
+    const state = this._interpreter.turnRight();
+    this._transceiver.emitState(state);
+    return state;
   }
+  
   turnLeft(): State {
-    return this._interpreter.turnLeft();
+    const state = this._interpreter.turnLeft();
+    this._transceiver.emitState(state);
+    return state;
   }
+  
   moveForward(): State {
-    return this._interpreter.moveForward();
+    const state = this._interpreter.moveForward();
+    this._transceiver.emitState(state);
+    return state;
   }
+  
   moveBackward(): State {
-    return this._interpreter.moveBackward();
+    const state = this._interpreter.moveBackward();
+    this._transceiver.emitState(state);
+    return state;
   }
 }
