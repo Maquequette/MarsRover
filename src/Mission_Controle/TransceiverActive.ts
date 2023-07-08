@@ -7,12 +7,18 @@ export class TransceiverActive {
     this._socket = io("http://localhost:3000");
   }
 
-  public setAction(action: string) {
+  public emitAction(action: string) {
     this._socket.emit("action", action);
   }
 
   public handleState() {
     this._socket.on("state", () => {
+      console.log("caca");
+    });
+  }
+
+  public handleLanding() {
+    this._socket.on("landing", () => {
       console.log("caca");
     });
   }

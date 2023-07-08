@@ -48,19 +48,21 @@ describe("remote => basic usage", () => {
         new Size(new Coordinate(planetSize), new Coordinate(planetSize))
       );
 
-      const wall_1: RoverInterface = new Rover(
+      const wall_1: RoverInterface = new Rover();
+      wall_1.land(
         orientation,
         new PositionBuilder(latStart, lngStart, planet).build()
       );
 
-      const wall_2: RoverInterface = new Rover(
+      const wall_2: RoverInterface = new Rover();
+      wall_2.land(
         orientation,
         new PositionBuilder(latStart, lngStart, planet).build()
       );
       const remote = new Interpreter(wall_2);
 
-      let final: Array<State> = [actionToFunction(action, wall_1)];
-      let received: Array<State> = remote.interpret(action);
+      let final: Array<State | Error> = [actionToFunction(action, wall_1)];
+      let received: Array<State | Error> = remote.interpret(action);
 
       expect(received).toStrictEqual(final);
     }
@@ -75,10 +77,8 @@ describe("remote => defined complex usage", () => {
     (orientation: Orientation) => {
       const planet = new Planet(new Size(new Coordinate(5), new Coordinate(5)));
 
-      const wall_e: RoverInterface = new Rover(
-        orientation,
-        new PositionBuilder(0, 0, planet).build()
-      );
+      const wall_e: RoverInterface = new Rover();
+      wall_e.land(orientation, new PositionBuilder(0, 0, planet).build());
 
       const remote = new Interpreter(wall_e);
       let final: State = new State(
@@ -86,7 +86,7 @@ describe("remote => defined complex usage", () => {
         new PositionBuilder(4, 1, planet).build()
       );
 
-      let received: Array<State> = remote.interpret(commands);
+      let received: Array<State | Error> = remote.interpret(commands);
       expect(received.at(-1)).toStrictEqual(final);
     }
   );

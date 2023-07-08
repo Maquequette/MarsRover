@@ -1,5 +1,8 @@
+import { Orientation } from "../../Topology/Geometry/Enum/Orientation";
+import { Position } from "../../Topology/Geometry/Position";
 import { Actions } from "../Enum/Actions";
 import { RoverInterface } from "../Interface/RoverInterface";
+import { Rover } from "../Rover";
 import { State } from "../State";
 
 export class Interpreter implements RoverInterface {
@@ -9,10 +12,14 @@ export class Interpreter implements RoverInterface {
     this._rover = rover;
   }
 
-  public interpret(commands: any): Array<State> {
+  land(orientation: Orientation, position: Position): State {
+    return this._rover.land(orientation, position);
+  }
+
+  public interpret(commands: any): Array<State | Error> {
     const arrayCommands: Array<Actions> = commands.split("");
 
-    return arrayCommands.map((command: Actions): State => {
+    return arrayCommands.map((command: Actions): State | Error => {
       switch (command) {
         case Actions.MoveForward:
           return this.moveForward();
@@ -20,22 +27,31 @@ export class Interpreter implements RoverInterface {
           return this.moveBackward();
         case Actions.TurnRight:
           return this.turnRight();
-        default:
+        case Actions.TurnLeft:
           return this.turnLeft();
+        default:
+          return Rover._landingError;
       }
     });
   }
 
-  turnRight(): State {
-    return this._rover.turnRight();
+  turnRight(): Error | State {
+    return this._rover.turnRight() || Rover._landingError;
   }
-  turnLeft(): State {
-    return this._rover.turnLeft();
+
+  turnLeft(): Error | State {
+    return this._rover.turnLeft() || Rover._landingError;
   }
-  moveForward(): State {
-    return this._rover.moveForward();
+
+  moveForward(): Error | State {
+    return this._rover.moveForward() || Rover._landingError;
   }
-  moveBackward(): State {
-    return this._rover.moveBackward();
+
+  moveBackward(): Error | State {
+    return this._rover.moveBackward() || Rover._landingError;
+  }
+
+  goBack(): Error | State {
+    return this._rover.goBack() || Rover._landingError;
   }
 }

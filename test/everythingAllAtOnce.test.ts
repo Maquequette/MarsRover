@@ -50,23 +50,25 @@ describe("TOTAL => EXTREME RANDOM COMPLEX USAGE WITH OBSTACLES", () => {
       const commands = getActions(nbCommand);
 
       //===
-      const wall_1: RoverInterface = new Rover(
+      const wall_1: RoverInterface = new Rover();
+      wall_1.land(
         orientation,
         new PositionBuilder(latStart, lngStart, planetWithObstacles).build()
       );
-      let final: Array<State> = [];
+      let final: Array<State | Error> = [];
       const arrayCmd = commands.split("");
       for (let i = 0; i <= arrayCmd.length - 1; i++) {
         final.push(actionToFunction(arrayCmd[i], wall_1));
       }
 
       //===
-      const wall_2: RoverInterface = new Rover(
+      const wall_2: RoverInterface = new Rover();
+      wall_2.land(
         orientation,
         new PositionBuilder(latStart, lngStart, planetWithObstacles).build()
       );
       const remote = new Interpreter(wall_2);
-      let received: Array<State> = remote.interpret(commands);
+      let received: Array<State | Error> = remote.interpret(commands);
 
       expect(received).toStrictEqual(final);
     }

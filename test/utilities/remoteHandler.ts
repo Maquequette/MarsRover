@@ -2,7 +2,10 @@ import { Actions } from "../../src/Rover/Enum/Actions";
 import { RoverInterface } from "../../src/Rover/Interface/RoverInterface";
 import { State } from "../../src/Rover/State";
 
-function actionToFunction(action: string, rover: RoverInterface): State {
+function actionToFunction(
+  action: string,
+  rover: RoverInterface
+): State | Error {
   switch (action) {
     case "F":
       return rover.moveForward();

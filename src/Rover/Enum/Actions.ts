@@ -3,4 +3,5 @@ export enum Actions {
   MoveBackward = "B",
   TurnLeft = "L",
   TurnRight = "R",
+  Invalid = "Invalid",
 }

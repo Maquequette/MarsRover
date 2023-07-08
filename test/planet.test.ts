@@ -46,12 +46,13 @@ describe("planet", () => {
 
       const final = new State(orientation, startPosition);
 
-      const wall_e: RoverInterface = new Rover(
+      const wall_e: RoverInterface = new Rover();
+      wall_e.land(
         orientation,
         new PositionBuilder(latStart, lngStart, planet).build()
       );
 
-      let received: State | null = null;
+      let received: State | null | Error = null;
       for (let i = 0; i < planetSize; i++) {
         received = wall_e.moveForward();
       }

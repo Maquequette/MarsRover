@@ -29,7 +29,8 @@ describe("obstacle", () => {
       ]
     );
 
-    const wall_e: RoverInterface = new Rover(
+    const wall_e: RoverInterface = new Rover();
+    wall_e.land(
       orientation,
       new PositionBuilder(0, 0, planetWithObstacles).build()
     );
@@ -39,7 +40,7 @@ describe("obstacle", () => {
       new PositionBuilder(0, 0, planetWithObstacles).build()
     );
 
-    let received: State = wall_e.moveForward();
+    let received: State | Error = wall_e.moveForward();
 
     expect(received).toStrictEqual(final);
   });
