@@ -1,7 +1,7 @@
-import { RoverInterface } from "./Interface/RoverInterface";
+import { RoverInterface } from "../Interface/RoverInterface";
 import { Interpreter } from "./Interpreter";
-import { State } from "./State";
-import { TransceiverPassive } from "./TransceiverPassive";
+import { State } from "../State";
+import { TransceiverPassive } from "../TransceiverPassive";
 
 export class RoverController implements RoverInterface {
   private readonly _interpreter: Interpreter;
@@ -28,19 +28,19 @@ export class RoverController implements RoverInterface {
     this._transceiver.emitState(state);
     return state;
   }
-  
+
   turnLeft(): State {
     const state = this._interpreter.turnLeft();
     this._transceiver.emitState(state);
     return state;
   }
-  
+
   moveForward(): State {
     const state = this._interpreter.moveForward();
     this._transceiver.emitState(state);
     return state;
   }
-  
+
   moveBackward(): State {
     const state = this._interpreter.moveBackward();
     this._transceiver.emitState(state);

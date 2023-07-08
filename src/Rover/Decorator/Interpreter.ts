@@ -1,6 +1,6 @@
-import { Actions } from "./Enum/Actions";
-import { RoverInterface } from "./Interface/RoverInterface";
-import { State } from "./State";
+import { Actions } from "../Enum/Actions";
+import { RoverInterface } from "../Interface/RoverInterface";
+import { State } from "../State";
 
 export class Interpreter implements RoverInterface {
   private readonly _rover: RoverInterface;

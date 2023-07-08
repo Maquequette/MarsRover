@@ -4,7 +4,7 @@ import { RoverInterface } from "../src/Rover/Interface/RoverInterface";
 import { Rover } from "../src/Rover/Rover";
 import { State } from "../src/Rover/State";
 import { CartesianData } from "./utilities/cartesianData";
-import { Interpreter } from "../src/Rover/Interpreter";
+import { Interpreter } from "../src/Rover/Decorator/Interpreter";
 import { actionToFunction } from "./utilities/remoteHandler";
 import { PositionBuilder } from "./utilities/Builder/PositionBuilder";
 import { Size } from "../src/Topology/Geometry/Size";
