@@ -1,3 +1,4 @@
+import { Planet } from "../Planet/Planet";
 import { Coordinate } from "./Coordinate";
 import { Point } from "./Point";
 
@@ -10,7 +11,7 @@ export class Size {
     this._width = width;
   }
 
-  getMaxPoint(): Point {
-    return new Point(this._width, this._height);
+  normalize(point: Point) {
+    return point.normalize(this._height, this._width);
   }
 }

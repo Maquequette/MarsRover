@@ -1,21 +1,34 @@
-import { Actions } from "../Rover/Enum/Actions";
-import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
+import * as readline from "node:readline/promises";
 import { TransceiverActive } from "./TransceiverActive";
-const rl = readline.createInterface({ input, output });
+import { Actions } from "../Rover/Enum/Actions";
+import { State } from "../Rover/State";
+import { Visualizer } from "../Ui/Visualizer";
 
-export class Remote {
+export class MissionControl {
+  private readonly _visulizer: Visualizer;
   private readonly _transceiver: TransceiverActive;
 
   constructor() {
+    this._visulizer = new Visualizer();
     this._transceiver = new TransceiverActive();
   }
 
+  listenAction() {
+    this._transceiver.handleLanding(this.handleLanding);
+    //this._transceiver.handleAction();
+  }
+
   listenInput() {
+    const rl = readline.createInterface({ input, output });
     rl.on("line", (input) => {
       const action = this.actionFromInput(input);
       this._transceiver.emitAction(action);
     });
+  }
+
+  handleLanding(state: State) {
+    state.visualize(this._visulizer);
   }
 
   actionFromInput(input: string): Actions {

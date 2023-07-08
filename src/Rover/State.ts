@@ -1,9 +1,10 @@
+import { Visualizer } from "../Ui/Visualizer";
 import { Orientation } from "../Topology/Geometry/Enum/Orientation";
 import { Position } from "../Topology/Geometry/Position";
 
 export class State {
-  public readonly orientation: Orientation;
-  public readonly position: Position;
+  private readonly orientation: Orientation;
+  private readonly position: Position;
 
   public constructor(orientation: Orientation, position: Position) {
     this.orientation = orientation;
@@ -73,5 +74,9 @@ export class State {
       default:
         return this.decreasedLatitude();
     }
+  }
+
+  public visualize(visualizer: Visualizer) {
+    return visualizer.visualize(this.position, this.orientation);
   }
 }

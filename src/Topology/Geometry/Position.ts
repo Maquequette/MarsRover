@@ -1,5 +1,6 @@
 import { Point } from "./Point";
 import { Planet } from "../Planet/Planet";
+import { Visualizer } from "../../Ui/Visualizer";
 
 export class Position {
   private readonly _point: Point;

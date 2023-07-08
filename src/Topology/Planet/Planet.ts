@@ -9,7 +9,7 @@ export class Planet {
   }
 
   normalize(point: Point): Point {
-    return point.normalize(this._size.getMaxPoint());
+    return this._size.normalize(point);
   }
 
   hasObstacles(point: Point): boolean {
