@@ -14,13 +14,13 @@ export class TransceiverActive {
 
   public handleAction(onAction: Function) {
     this._socket.on("state", (state: State | Error) => {
-      onAction(state);
+      return onAction(state);
     });
   }
 
   public handleLanding(onLanding: Function) {
     this._socket.on("landing", (state: State) => {
-      onLanding(state);
+      return onLanding(state);
     });
   }
 }

@@ -25,37 +25,36 @@ export class RoverController implements RoverInterface {
   }
 
   private interpret(action: string) {
-    // console.warn(this._interpreter);
-    // const states = this._interpreter.interpret(action);
-    // this._transceiver.emitStates(states);
-    // return states;
+    const states = this._interpreter.interpret(action);
+    this._transceiver.emitStates(states);
+    return states;
   }
 
-  turnRight(): State | Error {
+  public turnRight(): State | Error {
     const state = this._interpreter.turnRight();
     this._transceiver.emitState(state);
     return state;
   }
 
-  turnLeft(): State | Error {
+  public turnLeft(): State | Error {
     const state = this._interpreter.turnLeft();
     this._transceiver.emitState(state);
     return state;
   }
 
-  moveForward(): State | Error {
+  public moveForward(): State | Error {
     const state = this._interpreter.moveForward();
     this._transceiver.emitState(state);
     return state;
   }
 
-  moveBackward(): State | Error {
+  public moveBackward(): State | Error {
     const state = this._interpreter.moveBackward();
     this._transceiver.emitState(state);
     return state;
   }
 
-  goBack(): State | Error {
+  public goBack(): State | Error {
     const state = this._interpreter.moveBackward();
     this._transceiver.emitState(state);
     return state;

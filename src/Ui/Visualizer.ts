@@ -10,6 +10,7 @@ import { RoverRenderer } from "./RoverRenderer";
 
 export class Visualizer {
   public visualize(position: Position, orientation: Orientation) {
+    console.log("la crotte");
     let prevPosition = position;
     let content: string = "";
     const planet: Planet = position.getPlanet();
@@ -32,6 +33,6 @@ export class Visualizer {
       }
       content += "\n";
     }
-    return content;
+    console.log("content");
   }
 }

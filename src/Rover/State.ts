@@ -77,6 +77,6 @@ export class State {
   }
 
   public visualize(visualizer: Visualizer) {
-    return visualizer.visualize(this.position, this.orientation);
+    visualizer.visualize(this.position, this.orientation);
   }
 }

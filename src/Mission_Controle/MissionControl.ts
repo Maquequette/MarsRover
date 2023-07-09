@@ -26,6 +26,7 @@ export class MissionControl {
   }
 
   public handleVisualization(state: State) {
+    console.log("state");
     state.visualize(this._visulizer);
   }
 
