@@ -21,7 +21,7 @@ export class RoverController implements RoverInterface {
 
   public connect() {
     this._transceiver.listen();
-    this._transceiver.handleCommand(this.interpret);
+    this._transceiver.handleCommand(this.interpret.bind(this));
   }
 
   private interpret(action: string) {
