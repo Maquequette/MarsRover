@@ -12,7 +12,7 @@ export class Interpreter implements RoverInterface {
     this._rover = rover;
   }
 
-  land(orientation: Orientation, position: Position): State {
+  public land(orientation: Orientation, position: Position): State | Error {
     return this._rover.land(orientation, position);
   }
 
@@ -35,23 +35,23 @@ export class Interpreter implements RoverInterface {
     });
   }
 
-  turnRight(): Error | State {
+  public turnRight(): Error | State {
     return this._rover.turnRight() || Rover._landingError;
   }
 
-  turnLeft(): Error | State {
+  public turnLeft(): Error | State {
     return this._rover.turnLeft() || Rover._landingError;
   }
 
-  moveForward(): Error | State {
+  public moveForward(): Error | State {
     return this._rover.moveForward() || Rover._landingError;
   }
 
-  moveBackward(): Error | State {
+  public moveBackward(): Error | State {
     return this._rover.moveBackward() || Rover._landingError;
   }
 
-  goBack(): Error | State {
+  public goBack(): Error | State {
     return this._rover.goBack() || Rover._landingError;
   }
 }

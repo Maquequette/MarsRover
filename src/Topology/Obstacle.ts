@@ -6,7 +6,7 @@ export class Obstacle {
     this._point = point;
   }
 
-  hasObstacle(point: Point): boolean {
+  public hasObstacle(point: Point): boolean {
     return this._point.isSamePoint(point);
   }
 }

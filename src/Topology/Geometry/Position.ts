@@ -45,4 +45,8 @@ export class Position {
     }
     return this;
   }
+
+  public getPlanet() {
+    return this._planet;
+  }
 }

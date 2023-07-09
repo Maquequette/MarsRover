@@ -8,37 +8,37 @@ export class Rover implements RoverInterface {
   private _previousState: State | undefined;
   static _landingError: Error = new Error("The rover has not landed");
 
-  land(orientation: Orientation, position: Position): State {
+  public land(orientation: Orientation, position: Position): State {
     this._state = new State(orientation, position);
     this._previousState = new State(orientation, position);
     return new State(orientation, position);
   }
 
-  turnLeft(): State | Error {
+  public turnLeft(): State | Error {
     this._previousState = this._state;
     this._state = this._state?.counterClockwiseRotation();
     return this._state || Rover._landingError;
   }
 
-  turnRight(): State | Error {
+  public turnRight(): State | Error {
     this._previousState = this._state;
     this._state = this._state?.clockwiseRotation();
     return this._state || Rover._landingError;
   }
 
-  moveForward(): State | Error {
+  public moveForward(): State | Error {
     this._previousState = this._state;
     this._state = this._state?.moveForward();
     return this._state || Rover._landingError;
   }
 
-  moveBackward(): State | Error {
+  public moveBackward(): State | Error {
     this._previousState = this._state;
     this._state = this._state?.moveBackward();
     return this._state || Rover._landingError;
   }
 
-  goBack(): State | Error {
+  public goBack(): State | Error {
     this._state = this._previousState;
     return this._state || Rover._landingError;
   }

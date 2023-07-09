@@ -1,32 +1,41 @@
+import { Orientation } from "../../Topology/Geometry/Enum/Orientation.js";
+import { Position } from "../../Topology/Geometry/Position.js";
 import { RoverInterface } from "../Interface/RoverInterface.js";
 import { State } from "../State.js";
 
 export class RoverLogger implements RoverInterface {
   private _logged: RoverInterface;
-  private _states: State[] = [];
+  private _states: Array<State | Error> = [];
 
   public constructor(logged: RoverInterface) {
     this._logged = logged;
   }
+  public land(orientation: Orientation, position: Position): State | Error {
+    return this.keepAndSend(this._logged.land(orientation, position));
+  }
 
-  private keepAndSend(etat: State) {
+  public goBack(): State | Error {
+    return this.keepAndSend(this._logged.goBack());
+  }
+
+  private keepAndSend(etat: State | Error) {
     this._states.push(etat);
     return etat;
   }
 
-  moveForward(): State {
+  public moveForward(): State | Error {
     return this.keepAndSend(this._logged.moveForward());
   }
 
-  moveBackward(): State {
+  public moveBackward(): State | Error {
     return this.keepAndSend(this._logged.moveBackward());
   }
 
-  turnRight(): State {
+  public turnRight(): State | Error {
     return this.keepAndSend(this._logged.turnRight());
   }
 
-  turnLeft(): State {
+  public turnLeft(): State | Error {
     return this.keepAndSend(this._logged.turnLeft());
   }
 

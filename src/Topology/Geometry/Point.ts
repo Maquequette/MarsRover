@@ -1,4 +1,5 @@
 import { Coordinate } from "./Coordinate";
+import { Size } from "./Size";
 
 export class Point {
   private readonly _latitude: Coordinate;
@@ -42,13 +43,6 @@ export class Point {
     return (
       this._latitude.equal(point._latitude) &&
       this._longitude.equal(point._longitude)
-    );
-  }
-
-  public distanceFrom(point: Point) {
-    return new Point(
-      point._latitude.substract(this._latitude),
-      point._longitude.substract(this._longitude)
     );
   }
 }

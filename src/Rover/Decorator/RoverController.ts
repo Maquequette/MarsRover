@@ -14,12 +14,12 @@ export class RoverController implements RoverInterface {
     this._transceiver = new TransceiverPassive();
   }
 
-  land(orientation: Orientation, position: Position): State {
-    this._transceiver.emitState
+  public land(orientation: Orientation, position: Position): State | Error {
+    this._transceiver.emitState;
     return this._interpreter.land(orientation, position);
   }
 
-  connect() {
+  public connect() {
     this._transceiver.listen();
     this._transceiver.handleCommand(this.interpret);
   }

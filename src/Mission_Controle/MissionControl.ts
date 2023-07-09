@@ -14,12 +14,12 @@ export class MissionControl {
     this._transceiver = new TransceiverActive();
   }
 
-  listenAction() {
+  public listenAction() {
     this._transceiver.handleLanding(this.handleLanding);
     //this._transceiver.handleAction();
   }
 
-  listenInput() {
+  public listenInput() {
     const rl = readline.createInterface({ input, output });
     rl.on("line", (input) => {
       const action = this.actionFromInput(input);
@@ -27,11 +27,11 @@ export class MissionControl {
     });
   }
 
-  handleLanding(state: State) {
+  public handleLanding(state: State) {
     state.visualize(this._visulizer);
   }
 
-  actionFromInput(input: string): Actions {
+  public actionFromInput(input: string): Actions {
     switch (input) {
       case "z":
         return Actions.MoveForward;

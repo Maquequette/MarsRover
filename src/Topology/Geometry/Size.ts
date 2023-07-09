@@ -11,7 +11,15 @@ export class Size {
     this._width = width;
   }
 
-  normalize(point: Point) {
+  public normalize(point: Point) {
     return point.normalize(this._height, this._width);
+  }
+
+  public getHeight(): Coordinate {
+    return this._height;
+  }
+
+  public getWidth(): Coordinate {
+    return this._width;
   }
 }

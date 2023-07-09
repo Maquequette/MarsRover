@@ -24,4 +24,8 @@ export class Coordinate {
   public equal(coordinate: Coordinate): boolean {
     return this._value === coordinate._value;
   }
+
+  public getValue() {
+    return this._value;
+  }
 }
