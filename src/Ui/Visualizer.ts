@@ -4,10 +4,12 @@ import { Orientation } from "../Topology/Geometry/Enum/Orientation";
 import { Point } from "../Topology/Geometry/Point";
 import { Position } from "../Topology/Geometry/Position";
 import { Planet } from "../Topology/Planet/Planet";
-import { RoverRender } from "./RoverRenderer";
+import { ObstacleRenderer } from "./ObstacleRenderer";
+import { RoverRenderer } from "./RoverRenderer";
 
 export class Visualizer {
-  visualize(position: Position, orientation: Orientation) {
+  public visualize(position: Position, orientation: Orientation) {
+    let prevPosition = position;
     let content: string = "";
     const planet: Planet = position.getPlanet();
     const height: number = planet.getSize().getHeight().getValue();
@@ -19,8 +21,12 @@ export class Visualizer {
           new Point(new Coordinate(j), new Coordinate(i)),
           planet
         );
-        if (position.isSamePosition(index)) {
-          content += RoverRender.getSymbole(orientation);
+        if (index.isSamePosition(position)) {
+          content += RoverRenderer.getSymbole(orientation);
+        } else if (prevPosition.isSamePosition(position)) {
+          content += ObstacleRenderer.getSymbole();
+        } else {
+          content += "*";
         }
       }
       content += "\n";
