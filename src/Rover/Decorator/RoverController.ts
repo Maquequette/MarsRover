@@ -9,13 +9,13 @@ export class RoverController implements RoverInterface {
   private readonly _interpreter: Interpreter;
   private readonly _transceiver: TransceiverPassive;
 
-  constructor(rover: RoverInterface) {
-    this._interpreter = new Interpreter(rover);
-    this._transceiver = new TransceiverPassive();
+  constructor(interpreter: Interpreter, transceiver: TransceiverPassive) {
+    this._interpreter = interpreter;
+    this._transceiver = transceiver;
   }
 
   public land(orientation: Orientation, position: Position): State | Error {
-    this._transceiver.emitState;
+    this._transceiver.emitState(new State(orientation, position));
     return this._interpreter.land(orientation, position);
   }
 
@@ -24,10 +24,11 @@ export class RoverController implements RoverInterface {
     this._transceiver.handleCommand(this.interpret);
   }
 
-  private interpret(action: string): Array<State | Error> {
-    const states = this._interpreter.interpret(action);
-    this._transceiver.emitStates(states);
-    return states;
+  private interpret(action: string) {
+    // console.warn(this._interpreter);
+    // const states = this._interpreter.interpret(action);
+    // this._transceiver.emitStates(states);
+    // return states;
   }
 
   turnRight(): State | Error {

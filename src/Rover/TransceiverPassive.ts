@@ -19,7 +19,9 @@ export class TransceiverPassive {
 
   public handleCommand(onReceive: (command: Actions) => void) {
     this._io.on("connection", (socket) => {
-      socket.on("action", onReceive);
+      socket.on("action", (action) => {
+        onReceive(action);
+      });
     });
   }
 

@@ -14,12 +14,10 @@ export class MissionControl {
     this._transceiver = new TransceiverActive();
   }
 
-  public listenAction() {
-    this._transceiver.handleLanding(this.handleLanding);
-    //this._transceiver.handleAction();
-  }
+  public connect() {
+    this._transceiver.handleLanding(this.handleVisualization);
+    this._transceiver.handleAction(this.handleVisualization);
 
-  public listenInput() {
     const rl = readline.createInterface({ input, output });
     rl.on("line", (input) => {
       const action = this.actionFromInput(input);
@@ -27,7 +25,7 @@ export class MissionControl {
     });
   }
 
-  public handleLanding(state: State) {
+  public handleVisualization(state: State) {
     state.visualize(this._visulizer);
   }
 

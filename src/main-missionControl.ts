@@ -1,5 +1,4 @@
-import { TransceiverActive } from "./Mission_Controle/TransceiverActive";
+import { MissionControl } from "./Mission_Controle/MissionControl";
 
-const missionControl = new TransceiverActive();
-missionControl.emitAction("F");
-//missionControl.handleState();
+const missionControl = new MissionControl();
+missionControl.connect();
