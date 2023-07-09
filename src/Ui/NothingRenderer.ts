@@ -1,7 +1,7 @@
 import { Symbol } from "./Enum/Symbol";
 
-export class ObstacleRenderer {
+export class NothingeRenderer {
   static getSymbole(): string {
-    return Symbol.Obstacle.toString();
+    return Symbol.Nothing.toString();
   }
 }

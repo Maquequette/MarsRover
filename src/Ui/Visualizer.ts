@@ -4,6 +4,7 @@ import { Orientation } from "../Topology/Geometry/Enum/Orientation";
 import { Point } from "../Topology/Geometry/Point";
 import { Position } from "../Topology/Geometry/Position";
 import { Planet } from "../Topology/Planet/Planet";
+import { NothingeRenderer } from "./NothingRenderer";
 import { ObstacleRenderer } from "./ObstacleRenderer";
 import { RoverRenderer } from "./RoverRenderer";
 
@@ -26,7 +27,7 @@ export class Visualizer {
         } else if (prevPosition.isSamePosition(position)) {
           content += ObstacleRenderer.getSymbole();
         } else {
-          content += "*";
+          content += NothingeRenderer.getSymbole();
         }
       }
       content += "\n";

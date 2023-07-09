@@ -1,10 +1,10 @@
 import { Orientation } from "../Topology/Geometry/Enum/Orientation";
-import { RoverSymbol } from "./Enum/RoverSymbol";
+import { Symbol } from "./Enum/Symbol";
 
 export class RoverRenderer {
-  static getSymbole(orientation: Orientation): string {
-    const index = Object.keys(RoverSymbol).indexOf(orientation.toString());
-    const symbole = Object.values(RoverSymbol)[index];
+  static getSymbole(orientation: Orientation): Symbol {
+    const index = Object.keys(Symbol).indexOf(orientation.toString());
+    const symbole = Object.values(Symbol)[index];
     return symbole;
   }
 }
