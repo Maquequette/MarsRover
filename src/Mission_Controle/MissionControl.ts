@@ -16,7 +16,7 @@ export class MissionControl {
 
   public connect() {
     this._transceiver.handleLanding(this.handleVisualization);
-    this._transceiver.handleAction(this.handleVisualization);
+    this._transceiver.handleActions(this.handleVisualization);
 
     const rl = readline.createInterface({ input, output });
     rl.on("line", (input) => {

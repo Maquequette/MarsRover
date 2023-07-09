@@ -12,9 +12,10 @@ export class TransceiverActive {
     this._socket.emit("action", action);
   }
 
-  public handleAction(onAction: Function) {
-    this._socket.on("state", (state: State | Error) => {
-      return onAction(state);
+  public handleActions(onAction: Function) {
+    this._socket.on("states", (states) => {
+      console.log("states");
+      return onAction(states);
     });
   }
 

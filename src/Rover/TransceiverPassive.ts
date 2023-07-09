@@ -26,20 +26,14 @@ export class TransceiverPassive {
   }
 
   public emitState(state: State | Error) {
-    this._io.on("connection", (socket) => {
-      socket.emit("state", state);
-    });
+    this._io.emit("state", state);
   }
 
   public emitStates(states: Array<State | Error>) {
-    this._io.on("connection", (socket) => {
-      socket.emit("states", states);
-    });
+    this._io.emit("states", states);
   }
 
   public emitLanding(state: State) {
-    this._io.on("connection", (socket) => {
-      socket.emit("landing", state);
-    });
+    this._io.emit("landing", state);
   }
 }
