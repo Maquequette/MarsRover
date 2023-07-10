@@ -20,15 +20,14 @@ export class MissionControl {
 
   public handleVisualization(res: any) {
     const rl = readline.createInterface({ input, output });
-    rl.write("Landing succeed");
     rl.write("What do you wanna do ?");
     rl.on("line", (input) => {
       const action = UserInterpreter.actionFromInput(input);
       this._transceiver.emitAction(action);
     });
 
-    if (res[0]?.message) {
-      return console.log(res[0].message);
+    if (res[0] || res[0]?.message) {
+      return console.log("Err");
     }
 
     const state = State.fromJson(res[0]);

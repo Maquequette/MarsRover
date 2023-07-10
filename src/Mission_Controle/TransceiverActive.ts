@@ -14,7 +14,6 @@ export class TransceiverActive {
 
   public handleStates(onAction: Function) {
     this._socket.on("states", (states) => {
-      console.log("mamamamamam");
       onAction(states);
     });
   }

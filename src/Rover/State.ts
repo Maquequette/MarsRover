@@ -94,8 +94,8 @@ export class State {
         ),
         new Planet(
           new Size(
-            new Coordinate(json.position._planet._size._width._value),
-            new Coordinate(json.position._planet._size._height._value)
+            new Coordinate(json._position._planet._size._width._value),
+            new Coordinate(json._position._planet._size._height._value)
           )
         )
       )
