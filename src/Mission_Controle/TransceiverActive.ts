@@ -9,6 +9,7 @@ export class TransceiverActive {
   }
 
   public emitAction(action: string) {
+    console.log("emit action");
     this._socket.emit("action", action);
   }
 

@@ -31,6 +31,6 @@ export class Visualizer {
       }
       content += "\n";
     }
-    // console.log("content");
+    console.log(content);
   }
 }

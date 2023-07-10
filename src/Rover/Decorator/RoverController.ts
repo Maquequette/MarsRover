@@ -32,31 +32,31 @@ export class RoverController implements RoverInterface {
 
   public turnRight(): State | Error {
     const state = this._interpreter.turnRight();
-    this._transceiver.emitState(state);
+    this._transceiver.emitStates([state]);
     return state;
   }
 
   public turnLeft(): State | Error {
     const state = this._interpreter.turnLeft();
-    this._transceiver.emitState(state);
+    this._transceiver.emitStates([state]);
     return state;
   }
 
   public moveForward(): State | Error {
     const state = this._interpreter.moveForward();
-    this._transceiver.emitState(state);
+    this._transceiver.emitStates([state]);
     return state;
   }
 
   public moveBackward(): State | Error {
     const state = this._interpreter.moveBackward();
-    this._transceiver.emitState(state);
+    this._transceiver.emitStates([state]);
     return state;
   }
 
   public goBack(): State | Error {
     const state = this._interpreter.moveBackward();
-    this._transceiver.emitState(state);
+    this._transceiver.emitStates([state]);
     return state;
   }
 }

@@ -4,6 +4,7 @@ import { TransceiverActive } from "./TransceiverActive";
 import { State } from "../Rover/State";
 import { Visualizer } from "../Ui/Visualizer";
 import { UserInterpreter } from "./Utilities/UserInterpreter";
+const rl = readline.createInterface({ input, output });
 
 export class MissionControl {
   private readonly _visualizer: Visualizer;
@@ -19,18 +20,16 @@ export class MissionControl {
   }
 
   public handleVisualization(res: any) {
-    const rl = readline.createInterface({ input, output });
-    rl.write("What do you wanna do ?");
+    rl.write("What do you wanna do ? \n");
     rl.on("line", (input) => {
       const action = UserInterpreter.actionFromInput(input);
       this._transceiver.emitAction(action);
+      rl.close();
     });
 
-    if (res[0] || res[0]?.message) {
-      return console.log("Err");
+    if (res[0] && res[0]?.message) {
+      const state = State.fromJson(res[0]);
+      state.visualize(this._visualizer);
     }
-
-    const state = State.fromJson(res[0]);
-    state.visualize(this._visualizer);
   }
 }

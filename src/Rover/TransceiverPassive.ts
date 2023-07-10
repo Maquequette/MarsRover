@@ -26,17 +26,10 @@ export class TransceiverPassive {
     });
   }
 
-  public emitState(state: State | Error) {
-    this._io.on("connection", (socket) => {
-      socket.emit("state", state);
-    });
-  }
-
   public emitStates(states: Array<State | Error>) {
     this._io.on("connection", (socket) => {
+      console.log("ui");
       socket.emit("states", states);
     });
-    // console.log("emit states");
-    // this._io.emit("states", states);
   }
 }
