@@ -14,14 +14,8 @@ export class TransceiverActive {
 
   public handleStates(onAction: Function) {
     this._socket.on("states", (states) => {
-      return onAction(states);
-    });
-  }
-
-  public handleLanding(onLanding: Function) {
-    this._socket.on("landing", (state: State) => {
-      console.log("landddeee");
-      return onLanding(state);
+      console.log("mamamamamam");
+      onAction(states);
     });
   }
 }

@@ -12,10 +12,6 @@ export class Interpreter implements RoverInterface {
     this._rover = rover;
   }
 
-  public land(orientation: Orientation, position: Position): State | Error {
-    return this._rover.land(orientation, position);
-  }
-
   public interpret(commands: any): Array<State | Error> {
     const arrayCommands: Array<Actions> = commands.split("");
 
@@ -33,6 +29,9 @@ export class Interpreter implements RoverInterface {
           return Rover._landingError;
       }
     });
+  }
+  public land(orientation: Orientation, position: Position): State | Error {
+    return this._rover.land(orientation, position);
   }
 
   public turnRight(): Error | State {

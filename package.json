@@ -9,7 +9,7 @@
   "scripts": {
     "start:rover": "ts-node src/main-rover.ts",
     "start:mission": "ts-node src/main-missionControl.ts",
-    "start": "concurrently \"npm run start:rover\" \"npm run start:mission\"",
+    "start": "concurrently \"npm run start:mission\" \"npm run start:rover\"",
     "test": "jest"
   },
   "author": "",

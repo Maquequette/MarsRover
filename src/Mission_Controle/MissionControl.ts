@@ -15,11 +15,10 @@ export class MissionControl {
   }
 
   public connect() {
-    this._transceiver.handleLanding(this.handleLanding.bind(this));
     this._transceiver.handleStates(this.handleVisualization.bind(this));
   }
 
-  public handleLanding(res: any) {
+  public handleVisualization(res: any) {
     const rl = readline.createInterface({ input, output });
     rl.write("Landing succeed");
     rl.write("What do you wanna do ?");
@@ -27,13 +26,11 @@ export class MissionControl {
       const action = UserInterpreter.actionFromInput(input);
       this._transceiver.emitAction(action);
     });
-    this.handleVisualization(res);
-  }
 
-  public handleVisualization(res: any) {
-    if (res[0].message) {
+    if (res[0]?.message) {
       return console.log(res[0].message);
     }
+
     const state = State.fromJson(res[0]);
     state.visualize(this._visualizer);
   }

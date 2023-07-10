@@ -26,7 +26,7 @@ export class RoverController implements RoverInterface {
   }
 
   public land(orientation: Orientation, position: Position): State | Error {
-    this._transceiver.emitLanding(new State(orientation, position));
+    this._transceiver.emitStates([new State(orientation, position)]);
     return this._interpreter.land(orientation, position);
   }
 
