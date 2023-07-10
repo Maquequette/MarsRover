@@ -14,4 +14,4 @@ const controller = new RoverController(
   new TransceiverPassive()
 );
 controller.connect();
-wall_e.land(Orientation.North, new PositionBuilder(0, 0, mars).build());
+controller.land(Orientation.North, new PositionBuilder(0, 0, mars).build());

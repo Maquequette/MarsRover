@@ -4,4 +4,5 @@ export enum Actions {
   TurnLeft = "L",
   TurnRight = "R",
   Invalid = "Invalid",
+  Land = "Land",
 }

@@ -12,7 +12,7 @@ export class TransceiverActive {
     this._socket.emit("action", action);
   }
 
-  public handleActions(onAction: Function) {
+  public handleStates(onAction: Function) {
     this._socket.on("states", (states) => {
       return onAction(states);
     });
@@ -20,6 +20,7 @@ export class TransceiverActive {
 
   public handleLanding(onLanding: Function) {
     this._socket.on("landing", (state: State) => {
+      console.log("landddeee");
       return onLanding(state);
     });
   }

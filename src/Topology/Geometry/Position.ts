@@ -50,16 +50,4 @@ export class Position {
   public getPlanet() {
     return this._planet;
   }
-
-  // static fromJson(json: string): Position {
-  //   return new Position(
-  //     new Point(
-  //       new Coordinate(json._point._latitude),
-  //       new Coordinate(json._point._longitude)
-  //     ),
-  //     new Planet(
-
-  //     )
-  //   );
-  // }
 }

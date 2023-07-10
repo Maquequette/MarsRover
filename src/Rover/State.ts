@@ -1,57 +1,61 @@
 import { Visualizer } from "../Ui/Visualizer";
 import { Orientation } from "../Topology/Geometry/Enum/Orientation";
 import { Position } from "../Topology/Geometry/Position";
+import { Point } from "../Topology/Geometry/Point";
+import { Coordinate } from "../Topology/Geometry/Coordinate";
+import { Planet } from "../Topology/Planet/Planet";
+import { Size } from "../Topology/Geometry/Size";
 
 export class State {
-  private readonly orientation: Orientation;
-  private readonly position: Position;
+  private readonly _orientation: Orientation;
+  private readonly _position: Position;
 
   public constructor(orientation: Orientation, position: Position) {
-    this.orientation = orientation;
-    this.position = position;
+    this._orientation = orientation;
+    this._position = position;
   }
 
   public decreasedLatitude(): State {
     return new State(
-      this.orientation,
-      this.position.decrementLatitudeIfAvailable()
+      this._orientation,
+      this._position.decrementLatitudeIfAvailable()
     );
   }
 
   public increasedLatitude(): State {
     return new State(
-      this.orientation,
-      this.position.incrementLatitudeIfAvailable()
+      this._orientation,
+      this._position.incrementLatitudeIfAvailable()
     );
   }
 
   public decreaseLongitude(): State {
     return new State(
-      this.orientation,
-      this.position.decrementLongitudeIfAvailable()
+      this._orientation,
+      this._position.decrementLongitudeIfAvailable()
     );
   }
 
   public increasedLongitude(): State {
     return new State(
-      this.orientation,
-      this.position.incrementLongitudeIfAvailable()
+      this._orientation,
+      this._position.incrementLongitudeIfAvailable()
     );
   }
 
   public clockwiseRotation(): State {
-    return new State(this.orientation.clockwiseRotation(), this.position);
+    return new State(this._orientation.clockwiseRotation(), this._position);
   }
 
   public counterClockwiseRotation(): State {
     return new State(
-      this.orientation.counterClockwiseRotation(),
-      this.position
+      this._orientation.counterClockwiseRotation(),
+      this._position
     );
   }
 
   public moveForward(): State {
-    switch (this.orientation) {
+    switch (this._orientation) {
       case Orientation.South:
         return this.decreasedLatitude();
       case Orientation.East:
@@ -64,7 +68,7 @@ export class State {
   }
 
   public moveBackward(): State {
-    switch (this.orientation) {
+    switch (this._orientation) {
       case Orientation.South:
         return this.increasedLatitude();
       case Orientation.East:
@@ -77,13 +81,24 @@ export class State {
   }
 
   public visualize(visualizer: Visualizer) {
-    visualizer.visualize(this.position, this.orientation);
+    visualizer.visualize(this._position, this._orientation);
   }
 
-  // static fromJson(json: string): State {
-  //   return new State(
-  //     Orientation.fromString(json.orientation._representation),
-  //     Position.fromJson(json.position)
-  //   );
-  // }
+  static fromJson(json: any) {
+    return new State(
+      Orientation.fromString(json._orientation._representation),
+      new Position(
+        new Point(
+          new Coordinate(json._position._point._latitude._value),
+          new Coordinate(json._position._point._longitude._value)
+        ),
+        new Planet(
+          new Size(
+            new Coordinate(json.position._planet._size._width._value),
+            new Coordinate(json.position._planet._size._height._value)
+          )
+        )
+      )
+    );
+  }
 }

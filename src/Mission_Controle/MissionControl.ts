@@ -1,10 +1,9 @@
 import { stdin as input, stdout as output } from "node:process";
 import * as readline from "node:readline/promises";
 import { TransceiverActive } from "./TransceiverActive";
-import { Actions } from "../Rover/Enum/Actions";
 import { State } from "../Rover/State";
 import { Visualizer } from "../Ui/Visualizer";
-import { plainToInstance } from "class-transformer";
+import { UserInterpreter } from "./Utilities/UserInterpreter";
 
 export class MissionControl {
   private readonly _visualizer: Visualizer;
@@ -16,34 +15,26 @@ export class MissionControl {
   }
 
   public connect() {
-    this._transceiver.handleLanding(this.handleVisualization.bind(this));
-    this._transceiver.handleActions(this.handleVisualization.bind(this));
+    this._transceiver.handleLanding(this.handleLanding.bind(this));
+    this._transceiver.handleStates(this.handleVisualization.bind(this));
+  }
 
+  public handleLanding(res: any) {
     const rl = readline.createInterface({ input, output });
+    rl.write("Landing succeed");
     rl.write("What do you wanna do ?");
     rl.on("line", (input) => {
-      const action = this.actionFromInput(input);
+      const action = UserInterpreter.actionFromInput(input);
       this._transceiver.emitAction(action);
     });
+    this.handleVisualization(res);
   }
 
-  public handleVisualization(res: Array<State>) {
-    const state = plainToInstance(State, res[0]);
-    state.visualize(this._visualizer);
-  }
-
-  public actionFromInput(input: string): Actions {
-    switch (input) {
-      case "z":
-        return Actions.MoveForward;
-      case "s":
-        return Actions.MoveBackward;
-      case "d":
-        return Actions.TurnRight;
-      case "q":
-        return Actions.TurnLeft;
-      default:
-        return Actions.Invalid;
+  public handleVisualization(res: any) {
+    if (res[0].message) {
+      return console.log(res[0].message);
     }
+    const state = State.fromJson(res[0]);
+    state.visualize(this._visualizer);
   }
 }

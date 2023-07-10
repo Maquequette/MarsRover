@@ -3,6 +3,7 @@ import { createServer, Server as HttpServer } from "http";
 import { Actions } from "./Enum/Actions";
 import { Socket } from "socket.io-client";
 import { State } from "./State";
+import { couldStartTrivia } from "typescript";
 
 export class TransceiverPassive {
   private readonly _io: Server;

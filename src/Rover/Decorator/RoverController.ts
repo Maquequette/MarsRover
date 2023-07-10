@@ -14,11 +14,6 @@ export class RoverController implements RoverInterface {
     this._transceiver = transceiver;
   }
 
-  public land(orientation: Orientation, position: Position): State | Error {
-    this._transceiver.emitState(new State(orientation, position));
-    return this._interpreter.land(orientation, position);
-  }
-
   public connect() {
     this._transceiver.listen();
     this._transceiver.handleCommand(this.interpret.bind(this));
@@ -28,6 +23,11 @@ export class RoverController implements RoverInterface {
     const states = this._interpreter.interpret(action);
     this._transceiver.emitStates(states);
     return states;
+  }
+
+  public land(orientation: Orientation, position: Position): State | Error {
+    this._transceiver.emitLanding(new State(orientation, position));
+    return this._interpreter.land(orientation, position);
   }
 
   public turnRight(): State | Error {
