@@ -1,9 +1,7 @@
 import { Server } from "socket.io";
 import { createServer, Server as HttpServer } from "http";
 import { Actions } from "./Enum/Actions";
-import { Socket } from "socket.io-client";
 import { State } from "./State";
-import { couldStartTrivia } from "typescript";
 
 export class TransceiverPassive {
   private readonly _io: Server;
@@ -16,6 +14,9 @@ export class TransceiverPassive {
 
   public listen() {
     this._server.listen(3000);
+    this._io.on("connection", () => {
+      this.emitStates;
+    });
   }
 
   public handleCommand(onReceive: (command: Actions) => void) {
@@ -28,7 +29,6 @@ export class TransceiverPassive {
 
   public emitStates(states: Array<State | Error>) {
     this._io.on("connection", (socket) => {
-      console.log("ui");
       socket.emit("states", states);
     });
   }
