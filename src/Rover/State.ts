@@ -79,4 +79,11 @@ export class State {
   public visualize(visualizer: Visualizer) {
     visualizer.visualize(this.position, this.orientation);
   }
+
+  // static fromJson(json: string): State {
+  //   return new State(
+  //     Orientation.fromString(json.orientation._representation),
+  //     Position.fromJson(json.position)
+  //   );
+  // }
 }

@@ -38,4 +38,17 @@ export class Orientation {
   public toString(): string {
     return this._representation;
   }
+
+  static fromString(string: any) {
+    switch (string) {
+      case Orientation.East:
+        return Orientation.East;
+      case Orientation.South:
+        return Orientation.South;
+      case Orientation.West:
+        return Orientation.West;
+      default:
+        return Orientation.North;
+    }
+  }
 }

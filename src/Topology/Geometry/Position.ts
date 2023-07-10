@@ -1,6 +1,7 @@
 import { Point } from "./Point";
 import { Planet } from "../Planet/Planet";
 import { Visualizer } from "../../Ui/Visualizer";
+import { Coordinate } from "./Coordinate";
 
 export class Position {
   private readonly _point: Point;
@@ -11,35 +12,35 @@ export class Position {
     this._planet = planet;
   }
 
-  incrementLatitudeIfAvailable(): Position {
+  public incrementLatitudeIfAvailable(): Position {
     return this.goIfValidPosition(
       new Position(this._point.incrementLatitude(), this._planet)
     );
   }
 
-  decrementLatitudeIfAvailable(): Position {
+  public decrementLatitudeIfAvailable(): Position {
     return this.goIfValidPosition(
       new Position(this._point.decrementLatitude(), this._planet)
     );
   }
 
-  incrementLongitudeIfAvailable(): Position {
+  public incrementLongitudeIfAvailable(): Position {
     return this.goIfValidPosition(
       new Position(this._point.incrementLongitude(), this._planet)
     );
   }
 
-  decrementLongitudeIfAvailable(): Position {
+  public decrementLongitudeIfAvailable(): Position {
     return this.goIfValidPosition(
       new Position(this._point.decrementLongitude(), this._planet)
     );
   }
 
-  isSamePosition(position: Position): boolean {
+  public isSamePosition(position: Position): boolean {
     return position._point.isSamePoint(this._point);
   }
 
-  goIfValidPosition(position: Position) {
+  public goIfValidPosition(position: Position) {
     if (!this._planet.hasObstacles(position._point)) {
       return position;
     }
@@ -49,4 +50,16 @@ export class Position {
   public getPlanet() {
     return this._planet;
   }
+
+  // static fromJson(json: string): Position {
+  //   return new Position(
+  //     new Point(
+  //       new Coordinate(json._point._latitude),
+  //       new Coordinate(json._point._longitude)
+  //     ),
+  //     new Planet(
+
+  //     )
+  //   );
+  // }
 }
