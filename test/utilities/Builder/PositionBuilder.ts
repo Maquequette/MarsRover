@@ -14,7 +14,7 @@ export class PositionBuilder {
     this._planet = planet;
   }
 
-  build(): Position {
+  public build(): Position {
     return new Position(
       new Point(this._latitude, this._longitude),
       this._planet

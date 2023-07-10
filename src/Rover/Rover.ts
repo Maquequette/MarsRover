@@ -4,29 +4,42 @@ import { RoverInterface } from "./Interface/RoverInterface";
 import { State } from "./State";
 
 export class Rover implements RoverInterface {
-  private _state: State;
+  private _state: State | undefined;
+  private _previousState: State | undefined;
+  static _landingError: Error = new Error("The rover has not landed");
 
-  constructor(orientation: Orientation, position: Position) {
+  public land(orientation: Orientation, position: Position): State {
     this._state = new State(orientation, position);
+    this._previousState = new State(orientation, position);
+    return new State(orientation, position);
   }
 
-  turnLeft(): State {
-    this._state = this._state.counterClockwiseRotation();
-    return this._state;
+  public turnLeft(): State | Error {
+    this._previousState = this._state;
+    this._state = this._state?.counterClockwiseRotation();
+    return this._state || Rover._landingError;
   }
 
-  turnRight(): State {
-    this._state = this._state.clockwiseRotation();
-    return this._state;
+  public turnRight(): State | Error {
+    this._previousState = this._state;
+    this._state = this._state?.clockwiseRotation();
+    return this._state || Rover._landingError;
   }
 
-  moveForward(): State {
-    this._state = this._state.moveForward();
-    return this._state;
+  public moveForward(): State | Error {
+    this._previousState = this._state;
+    this._state = this._state?.moveForward();
+    return this._state || Rover._landingError;
   }
 
-  moveBackward(): State {
-    this._state = this._state.moveBackward();
-    return this._state;
+  public moveBackward(): State | Error {
+    this._previousState = this._state;
+    this._state = this._state?.moveBackward();
+    return this._state || Rover._landingError;
+  }
+
+  public goBack(): State | Error {
+    this._state = this._previousState;
+    return this._state || Rover._landingError;
   }
 }

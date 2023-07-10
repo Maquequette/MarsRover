@@ -1,4 +1,5 @@
 import { Socket, io } from "socket.io-client";
+import { State } from "../Rover/State";
 
 export class TransceiverActive {
   private readonly _socket: Socket;
@@ -7,12 +8,20 @@ export class TransceiverActive {
     this._socket = io("http://localhost:3000");
   }
 
-  public setAction(action: string) {
+  public emitAction(action: string) {
     this._socket.emit("action", action);
-    // return new Promise((resolve) => {
-    //   , (response: any) => {
-    //     resolve(response);
-    //   });
-    // });
+  }
+
+  public handleStates(onAction: Function) {
+    this._socket.on("states", (states) => {
+      return onAction(states);
+    });
+  }
+
+  public handleLanding(onLanding: Function) {
+    this._socket.on("landing", (state: State) => {
+      console.log("landddeee");
+      return onLanding(state);
+    });
   }
 }

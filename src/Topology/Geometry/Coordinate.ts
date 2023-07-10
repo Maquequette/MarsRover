@@ -13,15 +13,19 @@ export class Coordinate {
     );
   }
 
-  public substract(): Coordinate {
-    return new Coordinate(this._value - 1);
+  public substract(coordinate: Coordinate): Coordinate {
+    return new Coordinate(this._value - coordinate._value);
   }
 
-  public add(): Coordinate {
-    return new Coordinate(this._value + 1);
+  public add(coordinate: Coordinate): Coordinate {
+    return new Coordinate(this._value + coordinate._value);
   }
 
   public equal(coordinate: Coordinate): boolean {
     return this._value === coordinate._value;
+  }
+
+  public getValue() {
+    return this._value;
   }
 }

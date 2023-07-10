@@ -18,9 +18,9 @@ describe("orientation", () => {
     [Orientation.South, 1, new State(Orientation.West, position)],
     [Orientation.West, 1, new State(Orientation.North, position)],
   ]).it("%s %s %s", (initial: Orientation, nb: number, final: State) => {
-    const wall_e = new Rover(initial, position);
-
-    let received: State | null = null;
+    const wall_e = new Rover();
+    wall_e.land(initial, position);
+    let received: State | null | Error = null;
     for (let nbRotation = 0; nbRotation < nb; nbRotation++) {
       received = wall_e.turnRight();
     }
@@ -34,9 +34,10 @@ describe("orientation", () => {
     [Orientation.South, 1, new State(Orientation.East, position)],
     [Orientation.East, 1, new State(Orientation.North, position)],
   ]).it("%s %s %s", (initial: Orientation, nb: number, final: State) => {
-    const wall_e: RoverInterface = new Rover(initial, position);
+    const wall_e: RoverInterface = new Rover();
+    wall_e.land(initial, position);
 
-    let received: State | null = null;
+    let received: State | null | Error = null;
     for (let nbRotation = 0; nbRotation < nb; nbRotation++) {
       received = wall_e.turnLeft();
     }

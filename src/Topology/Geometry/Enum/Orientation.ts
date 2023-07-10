@@ -9,7 +9,7 @@ export class Orientation {
     this._representation = representation;
   }
 
-  clockwiseRotation(): Orientation {
+  public clockwiseRotation(): Orientation {
     switch (this) {
       case Orientation.East:
         return Orientation.South;
@@ -22,7 +22,7 @@ export class Orientation {
     }
   }
 
-  counterClockwiseRotation(): Orientation {
+  public counterClockwiseRotation(): Orientation {
     switch (this) {
       case Orientation.East:
         return Orientation.North;
@@ -35,7 +35,20 @@ export class Orientation {
     }
   }
 
-  toString(): string {
+  public toString(): string {
     return this._representation;
+  }
+
+  static fromString(string: any) {
+    switch (string) {
+      case Orientation.East:
+        return Orientation.East;
+      case Orientation.South:
+        return Orientation.South;
+      case Orientation.West:
+        return Orientation.West;
+      default:
+        return Orientation.North;
+    }
   }
 }

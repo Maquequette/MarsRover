@@ -1,5 +1,6 @@
 import { Size } from "../Geometry/Size";
 import { Point } from "../Geometry/Point";
+import { Coordinate } from "../Geometry/Coordinate";
 
 export class Planet {
   protected readonly _size: Size;
@@ -8,11 +9,15 @@ export class Planet {
     this._size = size;
   }
 
-  normalize(point: Point): Point {
-    return point.normalize(this._size.getMaxPoint());
+  public normalize(point: Point): Point {
+    return this._size.normalize(point);
   }
 
-  hasObstacles(point: Point): boolean {
+  public hasObstacles(point: Point): boolean {
     return false;
+  }
+
+  getSize() {
+    return this._size;
   }
 }
