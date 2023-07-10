@@ -18,7 +18,7 @@ Pour lancer le controlleur du rover
 ```
 Pour lancer les test 
 ```bash
-  npm run start:mission
+  npm run test
 ```
 ## Architecture
 
